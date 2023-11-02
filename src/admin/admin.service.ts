@@ -1,26 +1,37 @@
 import { Injectable } from "@nestjs/common";
 import { CreateAdminInput } from "./dto/create-admin.input";
 import { UpdateAdminInput } from "./dto/update-admin.input";
+import { Repository } from "typeorm";
+import { Admin } from "./entities/admin.entity";
+import { InjectRepository } from "@nestjs/typeorm";
 
 @Injectable()
 export class AdminService {
-  create(createAdminInput: CreateAdminInput) {
-    return "This action adds a new admin";
+  constructor(
+    @InjectRepository(Admin)
+    private readonly adminRepository: Repository<Admin>
+  ){}
+  async create(createAdminInput: CreateAdminInput) {
+    return await this.adminRepository.save(createAdminInput);
   }
 
-  findAll() {
-    return `This action returns all admin`;
+  async findAll() {
+    return await this.adminRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} admin`;
+  async findOne(id: number) {
+    return await this.adminRepository.findOne({
+      where: {
+        id: id
+      }
+    });
   }
 
   update(id: number, updateAdminInput: UpdateAdminInput) {
-    return `This action updates a #${id} admin`;
+    return this.adminRepository.update({id: id}, {...updateAdminInput});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} admin`;
+  async remove(id: number) {
+    return await this.adminRepository.delete({id: id});
   }
 }

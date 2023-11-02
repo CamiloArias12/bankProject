@@ -1,19 +1,17 @@
 import { DynamicModule, Module } from "@nestjs/common";
-import { DatabaseService } from "./database.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule, ConfigService } from "@nestjs/config";
-import { Client } from "./entities/client";
-import { BranchOffice } from "./entities/branch-office";
-import { Admin } from "./entities/admin";
-import { CreditAccount } from "./entities/credit-account";
-import { CreditAccountQuota } from "./entities/qouta";
-import { CDTAccount } from "./entities/cdt-account";
+import { Admin } from "src/admin/entities/admin.entity";
+import { BranchOffice } from "src/branch-office/entities/branch-office.entity";
+import { Cdt } from "src/cdt/entities/cdt.entity";
 import { SavingAccount } from "src/saving-account/entities/saving-account.entity";
-import { Transaction } from "./entities/transaction";
+import { Credit } from "src/credit/entities/credit.entity";
+import { Transaction } from "src/transaction/entities/transaction.entity";
+import { Client } from "src/client/entities/client.entity";
 
 @Module({
   imports: [],
-  providers: [DatabaseService],
+  providers: [],
 })
 export class DatabaseModule {
   constructor() {}
@@ -27,7 +25,7 @@ export class DatabaseModule {
         username: configService.get("DB_USERNAME"),
         password: configService.get("DB_PASSWORD"),
         database: configService.get("DB_DATABASE"),
-          entities: [BranchOffice, Admin, Client, CreditAccount, CreditAccountQuota, CDTAccount, SavingAccount, Transaction],
+          entities: [Admin, BranchOffice, Cdt, SavingAccount, Credit, Transaction, Client ],
         synchronize: true,
       }),
       inject: [ConfigService],
