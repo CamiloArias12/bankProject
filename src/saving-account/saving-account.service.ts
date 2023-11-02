@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { CreateSavingAccountInput } from './dto/create-saving-account.input';
-import { UpdateSavingAccountInput } from './dto/update-saving-account.input';
+import { Injectable } from "@nestjs/common";
+import { CreateSavingAccountInput } from "./dto/create-saving-account.input";
+import { UpdateSavingAccountInput } from "./dto/update-saving-account.input";
 
 @Injectable()
 export class SavingAccountService {
   create(createSavingAccountInput: CreateSavingAccountInput) {
-    return 'This action adds a new savingAccount';
+    return "This action adds a new savingAccount";
   }
 
   findAll() {

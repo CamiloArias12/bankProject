@@ -1,8 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { CdtResolver } from './cdt.resolver';
-import { CdtService } from './cdt.service';
+import { Test, TestingModule } from "@nestjs/testing";
+import { CdtResolver } from "./cdt.resolver";
+import { CdtService } from "./cdt.service";
 
-describe('CdtResolver', () => {
+describe("CdtResolver", () => {
   let resolver: CdtResolver;
 
   beforeEach(async () => {
@@ -13,7 +13,7 @@ describe('CdtResolver', () => {
     resolver = module.get<CdtResolver>(CdtResolver);
   });
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(resolver).toBeDefined();
   });
 });

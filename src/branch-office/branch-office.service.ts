@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { CreateBranchOfficeInput } from './dto/create-branch-office.input';
-import { UpdateBranchOfficeInput } from './dto/update-branch-office.input';
+import { Injectable } from "@nestjs/common";
+import { CreateBranchOfficeInput } from "./dto/create-branch-office.input";
+import { UpdateBranchOfficeInput } from "./dto/update-branch-office.input";
 
 @Injectable()
 export class BranchOfficeService {
   create(createBranchOfficeInput: CreateBranchOfficeInput) {
-    return 'This action adds a new branchOffice';
+    return "This action adds a new branchOffice";
   }
 
   findAll() {

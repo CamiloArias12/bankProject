@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { CreateCdtInput } from './dto/create-cdt.input';
-import { UpdateCdtInput } from './dto/update-cdt.input';
+import { Injectable } from "@nestjs/common";
+import { CreateCdtInput } from "./dto/create-cdt.input";
+import { UpdateCdtInput } from "./dto/update-cdt.input";
 
 @Injectable()
 export class CdtService {
   create(createCdtInput: CreateCdtInput) {
-    return 'This action adds a new cdt';
+    return "This action adds a new cdt";
   }
 
   findAll() {

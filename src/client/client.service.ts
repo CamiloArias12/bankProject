@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { CreateClientInput } from './dto/create-client.input';
-import { UpdateClientInput } from './dto/update-client.input';
+import { Injectable } from "@nestjs/common";
+import { CreateClientInput } from "./dto/create-client.input";
+import { UpdateClientInput } from "./dto/update-client.input";
 
 @Injectable()
 export class ClientService {
   create(createClientInput: CreateClientInput) {
-    return 'This action adds a new client';
+    return "This action adds a new client";
   }
 
   findAll() {

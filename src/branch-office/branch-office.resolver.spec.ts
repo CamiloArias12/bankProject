@@ -1,8 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { BranchOfficeResolver } from './branch-office.resolver';
-import { BranchOfficeService } from './branch-office.service';
+import { Test, TestingModule } from "@nestjs/testing";
+import { BranchOfficeResolver } from "./branch-office.resolver";
+import { BranchOfficeService } from "./branch-office.service";
 
-describe('BranchOfficeResolver', () => {
+describe("BranchOfficeResolver", () => {
   let resolver: BranchOfficeResolver;
 
   beforeEach(async () => {
@@ -13,7 +13,7 @@ describe('BranchOfficeResolver', () => {
     resolver = module.get<BranchOfficeResolver>(BranchOfficeResolver);
   });
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(resolver).toBeDefined();
   });
 });

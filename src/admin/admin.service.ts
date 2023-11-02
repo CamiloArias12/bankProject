@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAdminInput } from './dto/create-admin.input';
-import { UpdateAdminInput } from './dto/update-admin.input';
+import { Injectable } from "@nestjs/common";
+import { CreateAdminInput } from "./dto/create-admin.input";
+import { UpdateAdminInput } from "./dto/update-admin.input";
 
 @Injectable()
 export class AdminService {
   create(createAdminInput: CreateAdminInput) {
-    return 'This action adds a new admin';
+    return "This action adds a new admin";
   }
 
   findAll() {

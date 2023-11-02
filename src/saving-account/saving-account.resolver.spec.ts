@@ -1,8 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { SavingAccountResolver } from './saving-account.resolver';
-import { SavingAccountService } from './saving-account.service';
+import { Test, TestingModule } from "@nestjs/testing";
+import { SavingAccountResolver } from "./saving-account.resolver";
+import { SavingAccountService } from "./saving-account.service";
 
-describe('SavingAccountResolver', () => {
+describe("SavingAccountResolver", () => {
   let resolver: SavingAccountResolver;
 
   beforeEach(async () => {
@@ -13,7 +13,7 @@ describe('SavingAccountResolver', () => {
     resolver = module.get<SavingAccountResolver>(SavingAccountResolver);
   });
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(resolver).toBeDefined();
   });
 });

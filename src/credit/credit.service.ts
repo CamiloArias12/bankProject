@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { CreateCreditInput } from './dto/create-credit.input';
-import { UpdateCreditInput } from './dto/update-credit.input';
+import { Injectable } from "@nestjs/common";
+import { CreateCreditInput } from "./dto/create-credit.input";
+import { UpdateCreditInput } from "./dto/update-credit.input";
 
 @Injectable()
 export class CreditService {
   create(createCreditInput: CreateCreditInput) {
-    return 'This action adds a new credit';
+    return "This action adds a new credit";
   }
 
   findAll() {
