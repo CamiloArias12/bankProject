@@ -11,11 +11,17 @@ import { BranchOfficeModule } from "./branch-office/branch-office.module";
 import { DatabaseModule } from "./database/database.module";
 import { ConfigModule } from "@nestjs/config";
 import * as path from "path";
+import { GraphQLModule } from "@nestjs/graphql";
+import { ApolloDriver } from "@nestjs/apollo";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: path.join(__dirname, "..", ".env"),
+    }),
+    GraphQLModule.forRoot({
+      driver: ApolloDriver,
+      autoSchemaFile: true
     }),
     AdminModule,
     BranchOfficeModule,
