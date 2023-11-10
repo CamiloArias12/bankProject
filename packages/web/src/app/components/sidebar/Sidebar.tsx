@@ -10,6 +10,8 @@ import AccountingIcon from '../logo/Accounting'
 import TreasuryIcon from '../logo/Treasury'
 import { useCookies } from 'next-client-cookies'
 import { Role } from '@/lib/utils/user/types'
+import { signOut, useSession } from 'next-auth/react'
+import { Button } from '@nextui-org/react'
 export default function SideBar() {
   const [toggleBar, setToggleBar] = useState(false)
   useState<boolean>(false)
@@ -17,19 +19,20 @@ export default function SideBar() {
 
   const route = useRouter()
   const cookies = useCookies()
-  const data = cookies.get('data')
-  const dataRole = cookies.get('role')
+  const { data: session } = useSession();
+  const data = session.user.identification;
+  const dataRole = session.user.role;
 
   return (
     <div
       className={`flex flex-col shadow  flex-grow justify-between bg-white  w-[250px]`}
     >
+      <Button onClick={() => signOut()}>Sign out</Button>
       <div className=" flex flex-col h-full ">
         <div className="relative ">
           <div
-            className={`absolute h-8 w-8 -right-6 ${
-              !toggleBar ? '-top-20' : '-top-10'
-            }`}
+            className={`absolute h-8 w-8 -right-6 ${!toggleBar ? '-top-20' : '-top-10'
+              }`}
           >
             <img
               src="/logo.svg"
@@ -121,11 +124,10 @@ export default function SideBar() {
                                 </div>
                                 {!toggleBar && (
                                   <label
-                                    className={`pl-6 text-sm font-sans  ${
-                                      sidebar.menu == select
-                                        ? 'text-[#054818] font-semibold'
-                                        : 'text-[#26384b]'
-                                    }`}
+                                    className={`pl-6 text-sm font-sans  ${sidebar.menu == select
+                                      ? 'text-[#054818] font-semibold'
+                                      : 'text-[#26384b]'
+                                      }`}
                                   >
                                     {sidebar.name}
                                   </label>
