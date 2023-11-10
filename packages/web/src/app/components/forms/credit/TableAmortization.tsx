@@ -1,4 +1,4 @@
-import { Affiliate } from '@/lib/utils/thirds/types';
+import { Affiliate } from '@/lib/utils/thirds/types'
 import {
   ColumnDef,
   Row,
@@ -6,14 +6,14 @@ import {
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { useVirtual } from 'react-virtual';
-import { motion } from 'framer-motion';
-import { AmortizationTable } from '@/lib/utils/credit/types';
-import { gql, useMutation } from '@apollo/client';
-import { NumericFormat } from 'react-number-format';
+  useReactTable
+} from '@tanstack/react-table'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { useVirtual } from 'react-virtual'
+import { motion } from 'framer-motion'
+import { AmortizationTable } from '@/lib/utils/credit/types'
+import { gql, useMutation } from '@apollo/client'
+import { NumericFormat } from 'react-number-format'
 const GENERATE_TABLE_AMORTIZATION_CHANGE = gql`
   mutation ($table: ChangeAmortization!) {
     amortizationTableChange(tableAmortization: $table) {
@@ -28,92 +28,96 @@ const GENERATE_TABLE_AMORTIZATION_CHANGE = gql`
       finalBalance
     }
   }
-`;
+`
 
 function TableAmortization({
   setSelected,
   data,
-  setData,
+  setData
 }: {
-  data: AmortizationTable[];
-  setData: any;
-  setSelected: any;
+  data: AmortizationTable[]
+  setData: any
+  setSelected: any
 }) {
   const [
     generateAmortizationChange,
     {
       data: dataAmortizationChange,
       loading: loadingAmortizationChange,
-      error: errorAmortizationChange,
-    },
-  ] = useMutation(GENERATE_TABLE_AMORTIZATION_CHANGE);
+      error: errorAmortizationChange
+    }
+  ] = useMutation(GENERATE_TABLE_AMORTIZATION_CHANGE)
   const handleLoanExtra = (index: number, value: string) => {
-    const dataA = [...data];
-    dataA[index].extraPayment = Number(value);
-    setData(dataA);
-  };
+    const dataA = [...data]
+    dataA[index].extraPayment = Number(value)
+    setData(dataA)
+  }
 
   const handleAmortizationTable = () => {
     const table = {
-      tableAmortization: data,
-    };
+      tableAmortization: data
+    }
     generateAmortizationChange({
       variables: {
-        table: table,
-      },
-    })
-  };
-
-   useEffect(()=>{
-      if(dataAmortizationChange){
-	 setData(dataAmortizationChange.amortizationTableChange)
+        table: table
       }
-   },[dataAmortizationChange])
+    })
+  }
+
+  useEffect(() => {
+    if (dataAmortizationChange) {
+      setData(dataAmortizationChange.amortizationTableChange)
+    }
+  }, [dataAmortizationChange])
 
   const columns = useMemo<ColumnDef<AmortizationTable>[]>(
     () => [
       {
         accessorKey: 'installmentNumber',
         size: 50,
-        cell: (info) => info.getValue(),
-        header: () => <span>No.</span>,
+        cell: info => info.getValue(),
+        header: () => <span>No.</span>
       },
 
       {
         accessorKey: 'paymentDate',
         size: 200,
         enableResizing: true,
-        cell: (info) => {
-          const date = new Date(String(info.getValue()));
+        cell: info => {
+          const date = new Date(String(info.getValue()))
 
-          return <div> {date.toDateString()}</div>;
+          return <div> {date.toDateString()}</div>
         },
-        header: () => <span>Fecha de pago</span>,
+        header: () => <span>Fecha de pago</span>
       },
       {
         accessorKey: 'initialBalance',
-        cell: (info:any) => ( <label>$ {info.getValue().toLocaleString()}</label>),
-        header: () => 'Balance inicial',
+        cell: (info: any) => (
+          <label>$ {info.getValue().toLocaleString()}</label>
+        ),
+        header: () => 'Balance inicial'
       },
       {
         accessorKey: 'scheduledPayment',
-        cell: (info:any) => ( <label>$ {info.getValue().toLocaleString()}</label>),
-        header: () => <span>Pago programado</span>,
+        cell: (info: any) => (
+          <label>$ {info.getValue().toLocaleString()}</label>
+        ),
+        header: () => <span>Pago programado</span>
       },
       {
         accessorKey: 'extraPayment',
         cell: (row: any) => (
           <div className="py-1 flex  ">
-	    <NumericFormat value={row.getValue()} thousandSeparator=","
-	       renderText={(value) => <b> $ {value}</b>}
+            <NumericFormat
+              value={row.getValue()}
+              thousandSeparator=","
+              renderText={value => <b> $ {value}</b>}
+              onValueChange={values => {
+                handleLoanExtra(row.row.id, values.floatValue.toString())
+              }}
+            />
 
-	         onValueChange={(values) => {
-		  handleLoanExtra(row.row.id,(values.floatValue).toString())
-		  }}
-
-	    />
-
-	   {/* 
+            {/* 
             <input
               className="bg-transparent text-center"
               value={row.getValue()}
@@ -124,7 +128,7 @@ function TableAmortization({
 	    */}
           </div>
         ),
-        header: () => <span>Pago extra</span>,
+        header: () => <span>Pago extra</span>
       },
 
       {
@@ -136,60 +140,65 @@ function TableAmortization({
             </label>
           </div>
         ),
-        header: () => <span>Pago total</span>,
+        header: () => <span>Pago total</span>
       },
       {
         accessorKey: 'capital',
 
-        cell: (info:any) => ( <label>$ {info.getValue().toLocaleString()}</label>),
-        header: () => <span>Capital</span>,
+        cell: (info: any) => (
+          <label>$ {info.getValue().toLocaleString()}</label>
+        ),
+        header: () => <span>Capital</span>
       },
       {
         accessorKey: 'interest',
 
-        cell: (info:any) => ( <label>$ {info.getValue().toLocaleString()}</label>),
-        header: () => <span>Interés</span>,
+        cell: (info: any) => (
+          <label>$ {info.getValue().toLocaleString()}</label>
+        ),
+        header: () => <span>Interés</span>
       },
       {
         accessorKey: 'finalBalance',
 
-        cell: (info:any) => ( <label>$ {info.getValue().toLocaleString()}</label>),
-        header: () => <span>Balance final</span>,
-      },
+        cell: (info: any) => (
+          <label>$ {info.getValue().toLocaleString()}</label>
+        ),
+        header: () => <span>Balance final</span>
+      }
     ],
-    [],
-  );
+    []
+  )
 
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>([])
 
   const table = useReactTable({
     data,
     columns,
     state: {
-      sorting,
+      sorting
     },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    debugTable: true,
-  });
+    debugTable: true
+  })
 
-  const tableContainerRef = useRef<HTMLDivElement>(null);
+  const tableContainerRef = useRef<HTMLDivElement>(null)
 
-  const { rows } = table.getRowModel();
+  const { rows } = table.getRowModel()
 
   const rowVirtualizer = useVirtual({
     parentRef: tableContainerRef,
     size: rows.length,
-    overscan: 8,
-  });
-  const { virtualItems: virtualRows, totalSize } = rowVirtualizer;
-  const paddingTop = virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0;
+    overscan: 8
+  })
+  const { virtualItems: virtualRows, totalSize } = rowVirtualizer
+  const paddingTop = virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0
   const paddingBottom =
     virtualRows.length > 0
       ? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0)
-      : 0;
-
+      : 0
 
   return (
     <>
@@ -207,9 +216,9 @@ function TableAmortization({
       >
         <table className="w-full table-fixed table-amortization ">
           <thead className="font-medium  bg-[#F2F5FA] ">
-            {table.getHeaderGroups().map((headerGroup) => (
+            {table.getHeaderGroups().map(headerGroup => (
               <tr className="rounded-lg" key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
+                {headerGroup.headers.map(header => {
                   return (
                     <th
                       className="text-center font-light py-2 font-medium "
@@ -223,21 +232,21 @@ function TableAmortization({
                             className: header.column.getCanSort()
                               ? 'cursor-pointer select-none'
                               : '',
-                            onClick: header.column.getToggleSortingHandler(),
+                            onClick: header.column.getToggleSortingHandler()
                           }}
                         >
                           {flexRender(
                             header.column.columnDef.header,
-                            header.getContext(),
+                            header.getContext()
                           )}
                           {{
                             asc: ' 🔼',
-                            desc: ' 🔽',
+                            desc: ' 🔽'
                           }[header.column.getIsSorted() as string] ?? null}
                         </div>
                       )}
                     </th>
-                  );
+                  )
                 })}
               </tr>
             ))}
@@ -249,29 +258,29 @@ function TableAmortization({
               </tr>
             )}
 
-            {virtualRows.map((virtualRow) => {
-              const row = rows[virtualRow.index] as Row<any>;
+            {virtualRows.map(virtualRow => {
+              const row = rows[virtualRow.index] as Row<any>
               return (
                 <>
                   <motion.tr
                     key={row.id}
                     className=" border-b border-b-gray-200 hover:border-l-4 p-2 hover:border-l-[#3C7AC2] "
                   >
-                    {row.getVisibleCells().map((cell) => {
+                    {row.getVisibleCells().map(cell => {
                       return (
                         <>
                           <td className="py-2 text-center">
                             {flexRender(
                               cell.column.columnDef.cell,
-                              cell.getContext(),
+                              cell.getContext()
                             )}
                           </td>
                         </>
-                      );
+                      )
                     })}
                   </motion.tr>
                 </>
-              );
+              )
             })}
             {paddingBottom > 0 && (
               <tr>
@@ -282,7 +291,7 @@ function TableAmortization({
         </table>
       </div>
     </>
-  );
+  )
 }
 
-export default TableAmortization;
+export default TableAmortization

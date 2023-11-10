@@ -1,15 +1,15 @@
 type CheckBoxThirdsProps = {
-  isChecked: boolean;
-  onChange: any;
-  name: string;
-  label: string;
-};
+  isChecked: boolean
+  onChange: any
+  name: string
+  label: string
+}
 
 function CheckBoxField({
   label,
   isChecked,
   onChange,
-  name,
+  name
 }: CheckBoxThirdsProps) {
   return (
     <>
@@ -19,13 +19,13 @@ function CheckBoxField({
             isChecked ? 'bg-[#054818]' : 'bg-white'
           }`}
           onClick={() => {
-            onChange(name, !isChecked);
+            onChange(name, !isChecked)
           }}
         />
         <label className="pl-3 text-input">{label}</label>
       </div>
     </>
-  );
+  )
 }
 
-export default CheckBoxField;
+export default CheckBoxField

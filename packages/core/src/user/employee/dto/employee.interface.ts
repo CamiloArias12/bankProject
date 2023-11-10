@@ -1,9 +1,7 @@
-export interface IEmployee{
-      
-   idEmployee?:number
+export interface IEmployee {
+  idEmployee?: number;
 
-   username:string
+  username: string;
 
-   password:string
-
+  password: string;
 }

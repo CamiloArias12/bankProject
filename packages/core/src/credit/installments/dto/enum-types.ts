@@ -1,7 +1,5 @@
-export enum StateInstallment{
-   PENDIENTE="Pendiente",
-   PAGADA="Pagada",
-   MORA="En mora"
+export enum StateInstallment {
+  PENDIENTE = "Pendiente",
+  PAGADA = "Pagada",
+  MORA = "En mora",
 }
-
-

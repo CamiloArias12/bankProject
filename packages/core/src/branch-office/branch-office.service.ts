@@ -7,14 +7,13 @@ import { Repository } from "typeorm";
 
 @Injectable()
 export class BranchOfficeService {
- constructor (
-      @InjectRepository(BranchOffice)
-      private readonly branchRepository:Repository<BranchOffice>,
-   ){}
+  constructor(
+    @InjectRepository(BranchOffice)
+    private readonly branchRepository: Repository<BranchOffice>,
+  ) {}
 
-
-async  create(createBranchOfficeInput: CreateBranchOfficeInput) {
-      return await this.branchRepository.save(createBranchOfficeInput)
+  async create(createBranchOfficeInput: CreateBranchOfficeInput) {
+    return await this.branchRepository.save(createBranchOfficeInput);
   }
 
   findAll() {
@@ -22,26 +21,25 @@ async  create(createBranchOfficeInput: CreateBranchOfficeInput) {
   }
 
   findOne(id: number) {
-   return this.branchRepository.findOne({where:{id:id}})
+    return this.branchRepository.findOne({ where: { id: id } });
   }
 
- async update(id: number, inputBranch: UpdateBranchOfficeInput) {
-     try {
-	 await this.branchRepository.update({id:id},{...inputBranch});
-	 return true;
-     } catch (e) {
-	return false;
-        /* handle error */
-     }
-     
+  async update(id: number, inputBranch: UpdateBranchOfficeInput) {
+    try {
+      await this.branchRepository.update({ id: id }, { ...inputBranch });
+      return true;
+    } catch (e) {
+      return false;
+      /* handle error */
+    }
   }
 
-   async delete (code:number):Promise<Boolean> {
-      try {
-	 await this.branchRepository.delete(code) 
-	 return true;
-      } catch (e) {
-	 console.log(e)
-	 return false
-      }
-  }}
+  async delete(code: number): Promise<Boolean> {
+    try {
+      await this.branchRepository.delete(code);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+}

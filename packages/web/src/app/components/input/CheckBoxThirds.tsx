@@ -1,8 +1,8 @@
 type CheckBoxThirdsProps = {
-  isChecked: boolean;
-  onChange: any;
-  name?: string;
-};
+  isChecked: boolean
+  onChange: any
+  name?: string
+}
 
 function CheckBoxThirds({ isChecked, onChange, name }: CheckBoxThirdsProps) {
   return (
@@ -19,7 +19,7 @@ function CheckBoxThirds({ isChecked, onChange, name }: CheckBoxThirdsProps) {
         </label>
       </div>
     </>
-  );
+  )
 }
 
-export default CheckBoxThirds;
+export default CheckBoxThirds

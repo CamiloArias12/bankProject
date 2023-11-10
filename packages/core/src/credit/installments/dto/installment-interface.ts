@@ -1,23 +1,19 @@
-export class IInstallment{
+export class IInstallment {
+  installmentNumber: number;
 
-   installmentNumber:number;
+  paymentDate: Date;
 
-   paymentDate: Date;
+  initialBalance: number;
 
-   initialBalance: number;
+  scheduledPayment: number;
 
-   scheduledPayment: number;
+  extraPayment: number;
 
-   extraPayment: number;
+  totalPayment: number;
 
-   totalPayment: number;
+  capital: number;
 
-   capital: number;
+  interest: number;
 
-   interest: number;
-
-   finalBalance: number;
-
+  finalBalance: number;
 }
-
-

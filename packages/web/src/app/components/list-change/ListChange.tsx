@@ -1,24 +1,24 @@
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 
 type PropsListChange = {
-  list: any[];
-  setIndexForm: any;
-  indexForm: any;
-  color: string;
-  children?: React.ReactNode;
-};
+  list: any[]
+  setIndexForm: any
+  indexForm: any
+  color: string
+  children?: React.ReactNode
+}
 
 function ListChange({
   list,
   setIndexForm,
   indexForm,
   color,
-  children,
+  children
 }: PropsListChange) {
   return (
     <div className="flex  lg:w-1/2">
       <ul className="flex flex-grow flex-row w-full">
-        {list.map((option) => (
+        {list.map(option => (
           <div
             key={option.id}
             className={`flex-grow w-full  rounded-tl-[20px]  rounded-tr-[100px] px-5 pt-3  text-sm text-center ${
@@ -27,7 +27,7 @@ function ListChange({
                 : 'bg-[#DDEEFF] text-sm'
             }`}
             onClick={() => {
-              setIndexForm(option.id);
+              setIndexForm(option.id)
             }}
           >
             {option.name}
@@ -36,7 +36,7 @@ function ListChange({
       </ul>
       {children}
     </div>
-  );
+  )
 }
 
-export default ListChange;
+export default ListChange

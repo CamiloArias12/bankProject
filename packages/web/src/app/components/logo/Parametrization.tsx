@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 function ParametrizationLogo({ color }: { color: string }) {
   return (
     <svg
@@ -14,7 +14,7 @@ function ParametrizationLogo({ color }: { color: string }) {
         d="M20,4a2.09,2.09,0,0,0-2.95.12L10.17,11,9,15l4-1.17L19.88,7A2.09,2.09,0,0,0,20,4Z"
         style={{
           fill: color,
-          strokeWidth: 2,
+          strokeWidth: 2
         }}
       />
       <path
@@ -25,7 +25,7 @@ function ParametrizationLogo({ color }: { color: string }) {
           stroke: color,
           strokeLinecap: 'round',
           strokeLinejoin: 'round',
-          strokeWidth: 2,
+          strokeWidth: 2
         }}
       />
       <path
@@ -37,10 +37,10 @@ function ParametrizationLogo({ color }: { color: string }) {
           stroke: color,
           strokeLinecap: 'round',
           strokeLinejoin: 'round',
-          strokeWidth: 2,
+          strokeWidth: 2
         }}
       />
     </svg>
-  );
+  )
 }
-export default ParametrizationLogo;
+export default ParametrizationLogo

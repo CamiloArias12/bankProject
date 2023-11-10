@@ -1,29 +1,26 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Cdt } from 'src/cdt/entities/cdt.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { ObjectType, Field, Int } from "@nestjs/graphql";
+import { Cdt } from "src/cdt/entities/cdt.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @ObjectType()
 @Entity()
 export class PaymentCdt {
+  @Field()
+  @PrimaryGeneratedColumn()
+  id: number;
 
-   @Field()
-   @PrimaryGeneratedColumn()
-   id:number
-   
-   @Field({defaultValue:"Cdt"})
-   type:string
+  @Field({ defaultValue: "Cdt" })
+  type: string;
 
-   @Field()
-   @Column()
-   value:number
+  @Field()
+  @Column()
+  value: number;
 
-   @Field()
-   @Column('date')
-   date:Date
+  @Field()
+  @Column("date")
+  date: Date;
 
-
-   @Field(() =>Cdt)
-   @ManyToOne(() => Cdt, cdt=> cdt.payments,{nullable:false})
-   cdt: Cdt;
-   
+  @Field(() => Cdt)
+  @ManyToOne(() => Cdt, (cdt) => cdt.payments, { nullable: false })
+  cdt: Cdt;
 }

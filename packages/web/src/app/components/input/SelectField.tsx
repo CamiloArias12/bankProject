@@ -1,18 +1,18 @@
-import React, { use, useState } from 'react';
+import React, { use, useState } from 'react'
 
 type SelectFieldProps = {
-  name: string;
-  label: string;
-  value: string;
-  country?: string;
-  state?: string;
-  options: any;
-  setCountry?: any;
-  setState?: any;
-  image?: boolean;
-  children?: React.ReactNode;
-  handleGeneralInformation: any;
-};
+  name: string
+  label: string
+  value: string
+  country?: string
+  state?: string
+  options: any
+  setCountry?: any
+  setState?: any
+  image?: boolean
+  children?: React.ReactNode
+  handleGeneralInformation: any
+}
 
 function SelectField({
   name,
@@ -24,19 +24,25 @@ function SelectField({
   handleGeneralInformation,
   country,
   setCountry,
-  setState,
+  setState
 }: SelectFieldProps) {
-  const [toggle, setToggle] = useState<boolean>(false);
-  const [img, setImg] = useState<String>('CO');
-  const [text,setText]=useState(options ? options.map((option:any) => {option.id===value; return option.name;}) :'')
-   console.log(text)
+  const [toggle, setToggle] = useState<boolean>(false)
+  const [img, setImg] = useState<String>('CO')
+  const [text, setText] = useState(
+    options
+      ? options.map((option: any) => {
+          option.id === value
+          return option.name
+        })
+      : ''
+  )
   return (
     <div className="flex flex-col relative text-input">
       <label className=" pb-2">{label}</label>
       <button
         className={`bg-white relative w-full flex  items-center  border border-gray-350  rounded-sm pl-3  text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500  h-[30px] mb-1`}
         onClick={() => {
-          setToggle(!toggle);
+          setToggle(!toggle)
         }}
       >
         <span>
@@ -58,13 +64,12 @@ function SelectField({
                   key={option.id}
                   className=" flex-grow text-gray-900 cursor-default select-none relative py-2  flex items-center hover:bg-[#f8fafb] transition"
                   onClick={() => {
-		     
-                    setToggle(!toggle);
-                    if (setCountry) setCountry(option.iso2);
-                    if (setState) setState(option.iso2);
-                    handleGeneralInformation(name, option.id);
-		    setText(option.name)
-                    setImg(option.iso2);
+                    setToggle(!toggle)
+                    if (setCountry) setCountry(option.iso2)
+                    if (setState) setState(option.iso2)
+                    handleGeneralInformation(name, option.id)
+                    setText(option.name)
+                    setImg(option.iso2)
                   }}
                 >
                   {image && (
@@ -87,7 +92,7 @@ function SelectField({
         </ul>
       </div>
     </div>
-  );
+  )
 }
 
-export default SelectField;
+export default SelectField

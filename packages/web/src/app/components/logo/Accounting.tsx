@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 function AccountingIcon({ color }: { color: string }) {
   return (
     <svg
@@ -68,6 +68,6 @@ function AccountingIcon({ color }: { color: string }) {
         </g>
       </g>
     </svg>
-  );
+  )
 }
-export default AccountingIcon;
+export default AccountingIcon

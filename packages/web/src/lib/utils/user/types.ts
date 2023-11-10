@@ -1,23 +1,18 @@
+export type User = {
+  identification: number
 
-export type User ={
+  name: string
 
-   identification: number; 
+  lastName: string
 
-   name:string
-   
-   lastName:string
+  phone: string
 
-   phone: string
+  email: string
 
-   email: string
-
-   password:string
-
+  password: string
 }
 
-
 export enum Role {
-   CLIENT="Cliente",
-   EMPLOYEE="Empleado"
-
+  CLIENT = 'Cliente',
+  EMPLOYEE = 'Empleado'
 }

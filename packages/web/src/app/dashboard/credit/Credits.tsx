@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import TableCredits from '@/app/components/forms/credit/TableCredit';
-import { Credit } from '@/lib/utils/credit/types';
+import TableCredits from '@/app/components/forms/credit/TableCredit'
+import { Credit } from '@/lib/utils/credit/types'
 
-export const revalidate = 0;
+export const revalidate = 0
 
 function Credits({ credits }: { credits: Credit[] }) {
   return (
@@ -12,7 +12,7 @@ function Credits({ credits }: { credits: Credit[] }) {
         <TableCredits credits={credits} />
       </div>
     </div>
-  );
+  )
 }
 
-export default Credits;
+export default Credits

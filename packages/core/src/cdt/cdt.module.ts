@@ -6,8 +6,8 @@ import { Cdt } from "./entities/cdt.entity";
 import { UserModule } from "src/user/user.module";
 
 @Module({
-  imports:[TypeOrmModule.forFeature([Cdt]),UserModule], 
+  imports: [TypeOrmModule.forFeature([Cdt]), UserModule],
   providers: [CdtResolver, CdtService],
-  exports:[CdtService]
+  exports: [CdtService],
 })
 export class CdtModule {}

@@ -3,27 +3,24 @@ import { IUser } from "./user.interface";
 
 @InputType()
 export class CreateUserInput implements IUser {
+  @Field()
+  identification: number;
 
-   @Field()
-   identification: number; 
-   
-   @Field()
-   name:string
+  @Field()
+  name: string;
 
-   @Field()
-   lastName:string
+  @Field()
+  lastName: string;
 
-   @Field()
-   phone: string
+  @Field()
+  phone: string;
 
-   @Field()
-   email: string
+  @Field()
+  email: string;
 
-   @Field()
-   password:string
-   
-   @Field()
-   idBranch:number 
+  @Field()
+  password: string;
 
-
+  @Field()
+  idBranch: number;
 }

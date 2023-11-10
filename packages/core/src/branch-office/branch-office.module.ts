@@ -5,7 +5,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { BranchOffice } from "./entities/branch-office.entity";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([BranchOffice])],  
+  imports: [TypeOrmModule.forFeature([BranchOffice])],
   providers: [BranchOfficeResolver, BranchOfficeService],
 })
 export class BranchOfficeModule {}

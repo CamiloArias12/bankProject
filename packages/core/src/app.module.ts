@@ -13,18 +13,16 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver } from "@nestjs/apollo";
 import { UserModule } from "./user/user.module";
 import { DateScalar } from "./scalar-type";
-import { PaymentModule } from './payment/payment.module';
-
-console.log(path.join(__dirname, '..', '..', '..','.env'))
+import { PaymentModule } from "./payment/payment.module";
 
 @Module({
   imports: [
-       ConfigModule.forRoot({
-	    envFilePath: path.join(__dirname, '..', '..', '..','.env'),
-	 }),
+    ConfigModule.forRoot({
+      envFilePath: path.join(__dirname, "..", "..", "..", ".env"),
+    }),
     GraphQLModule.forRoot({
       driver: ApolloDriver,
-      autoSchemaFile: true
+      autoSchemaFile: true,
     }),
     UserModule,
     BranchOfficeModule,
@@ -36,6 +34,6 @@ console.log(path.join(__dirname, '..', '..', '..','.env'))
     PaymentModule,
   ],
   controllers: [AppController],
-  providers: [AppService,DateScalar],
+  providers: [AppService, DateScalar],
 })
 export class AppModule {}

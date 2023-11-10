@@ -1,7 +1,7 @@
 interface ButtonProps {
-  name: string;
-  background: string;
-  onClick?: any;
+  name: string
+  background: string
+  onClick?: any
 }
 
 function Button({ name, background, onClick }: ButtonProps) {
@@ -12,7 +12,7 @@ function Button({ name, background, onClick }: ButtonProps) {
     >
       {name}
     </button>
-  );
+  )
 }
 
-export default Button;
+export default Button

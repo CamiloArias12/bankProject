@@ -1,16 +1,15 @@
 /** @type {import('next').NextConfig} */
- 
-const nextEnv = require('@next/env');
-const path = require('path');
-const dotenv = require('dotenv');
 
-const envPath = path.join(__dirname, '..', '..', '.env');
-console.log("Path ",envPath)
-dotenv.config({ 
+const nextEnv = require('@next/env')
+const path = require('path')
+const dotenv = require('dotenv')
+
+const envPath = path.join(__dirname, '..', '..', '.env')
+dotenv.config({
   path: envPath
-});
+})
 module.exports = {
-env: {
+  env: {
     API_ENDPOINT: process.env.API_ENDPOINT
   },
   async redirects() {
@@ -18,24 +17,23 @@ env: {
       {
         source: '/',
         destination: '/login',
-        permanent: true,
-      },
+        permanent: true
+      }
     ]
   },
-   webpack: (config, { isServer }) => {
+  webpack: (config, { isServer }) => {
     // Add the GraphQL loader rule for both client and server bundles
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
       exclude: /node_modules/,
       use: [
         {
-          loader: 'graphql-tag/loader',
-        },
-      ],
-    });
+          loader: 'graphql-tag/loader'
+        }
+      ]
+    })
 
     // Return the updated Webpack configuration
-    return config;
-  },
+    return config
+  }
 }
-

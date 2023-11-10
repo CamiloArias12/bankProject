@@ -2,9 +2,8 @@ import { InputType, Int, Field } from "@nestjs/graphql";
 
 @InputType()
 export class CreateCdtInput {
-
   @Field()
-  startDate:Date
+  startDate: Date;
 
   @Field()
   depositAmount: number;
@@ -15,8 +14,6 @@ export class CreateCdtInput {
   @Field()
   interestRate: number;
 
-
   @Field()
-  clientId:number
-  
+  clientId: number;
 }

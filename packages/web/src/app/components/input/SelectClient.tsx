@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 type SelectProps = {
-  label?: string;
-  options: any;
-  onClick?: any;
-  setValue: any;
-  value?: any;
-  name: string;
-  direction?: boolean;
-};
+  label?: string
+  options: any
+  onClick?: any
+  setValue: any
+  value?: any
+  name: string
+  direction?: boolean
+}
 
 function SelectClient({
   label,
@@ -16,9 +16,9 @@ function SelectClient({
   setValue,
   value,
   name,
-  direction,
+  direction
 }: SelectProps) {
-  const [toggle, setToggle] = useState<boolean>(false);
+  const [toggle, setToggle] = useState<boolean>(false)
   return (
     <div
       className={`flex flex-grow pr-2  ${direction && 'pr-2'} ${
@@ -30,7 +30,7 @@ function SelectClient({
         className={`mb-1 text-input border border-gray-300 "type="text h-[30px]`}
         value={value}
         onClick={() => {
-          setToggle(!toggle);
+          setToggle(!toggle)
         }}
       />
       <div className={`flex flex-grow  ${!toggle && 'hidden'}`}>
@@ -42,21 +42,20 @@ function SelectClient({
                   key={index}
                   className=" flex-grow text-gray-900 cursor-default select-none relative py-3  flex items-center hover:bg-[#f8fafb] transition"
                   onClick={() => {
-                    setToggle(!toggle);
+                    setToggle(!toggle)
                     if (option.user) {
-                      setValue(name, option.user.identification);
+                      setValue(name, option.user.identification)
                       setValue(
                         'nameClient',
-                        `${option.user.name} ${option.user.lastName}`,
-                      );
+                        `${option.user.name} ${option.user.lastName}`
+                      )
                     }
-                    
                   }}
                 >
                   {option.user && (
                     <>
                       <span className="font-normal truncate mr-4">
-                        {(option.user.identification)}
+                        {option.user.identification}
                       </span>
                       <span className="font-normal truncate">{`${option.user.name}  ${option.user.lastName}`}</span>
                     </>
@@ -75,7 +74,7 @@ function SelectClient({
         </ul>
       </div>
     </div>
-  );
+  )
 }
 
-export default SelectClient;
+export default SelectClient

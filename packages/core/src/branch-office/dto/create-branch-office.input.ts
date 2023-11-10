@@ -2,7 +2,6 @@ import { InputType, Int, Field } from "@nestjs/graphql";
 
 @InputType()
 export class CreateBranchOfficeInput {
-
   @Field()
   name: string;
 
@@ -11,5 +10,4 @@ export class CreateBranchOfficeInput {
 
   @Field()
   phoneNumber: string;
- 
 }

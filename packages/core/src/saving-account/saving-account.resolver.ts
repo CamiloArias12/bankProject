@@ -8,10 +8,7 @@ import { ViewSaving } from "./saving-view.entity";
 
 @Resolver(() => SavingAccount)
 export class SavingAccountResolver {
-  constructor(
-     private readonly savingAccountService: SavingAccountService,
-
-  ) {}
+  constructor(private readonly savingAccountService: SavingAccountService) {}
 
   @Mutation(() => SavingAccount)
   async createSavingAccount(
@@ -41,11 +38,10 @@ export class SavingAccountResolver {
       updateSavingAccountInput,
     );
   }
- @Query(() => [ViewSaving])
+  @Query(() => [ViewSaving])
   async findAllSavingAccountByClient(
-      @Args("identification") identification:number
+    @Args("identification") identification: number,
   ): Promise<ViewSaving[]> {
-
     return await this.savingAccountService.findAllByClient(identification);
   }
   @Mutation(() => SavingAccount)

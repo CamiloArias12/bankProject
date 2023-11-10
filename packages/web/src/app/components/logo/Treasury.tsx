@@ -23,7 +23,7 @@ function TreasuryIcon({ color }: { color: string }) {
         />
       </g>
     </svg>
-  );
+  )
 }
 
-export default TreasuryIcon;
+export default TreasuryIcon

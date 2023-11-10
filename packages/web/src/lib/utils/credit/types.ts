@@ -1,54 +1,54 @@
 export type AmortizationTable = {
-  installmentNumber: number;
-  paymentDate: Date;
-  initialBalance: number;
-  scheduledPayment: number;
-  extraPayment: number;
-  totalPayment: number;
-  capital: number;
-  interest: number;
-  finalBalance: number;
-  state?: boolean;
-};
+  installmentNumber: number
+  paymentDate: Date
+  initialBalance: number
+  scheduledPayment: number
+  extraPayment: number
+  totalPayment: number
+  capital: number
+  interest: number
+  finalBalance: number
+  state?: boolean
+}
 
 export type Credit = {
-  id?: number;
-  name: string;
-  lastName: string;
-  creditValue: number;
-  interest: number;
-  startDate: Date;
-  state: string;
-};
+  id?: number
+  name: string
+  lastName: string
+  creditValue: number
+  interest: number
+  startDate: Date
+  state: string
+}
 
 export type RefinanceCredit = {
-  nameAffiliate: string;
+  nameAffiliate: string
 
-  identification: number;
+  identification: number
 
-  previewBalance: number;
+  previewBalance: number
 
-  typeCredit: string;
+  typeCredit: string
 
-  interest: number;
+  interest: number
 
-  idTypeCredit: number;
-};
+  idTypeCredit: number
+}
 
 export type InstallmentPayment = {
-  installmentNumber: number;
-  isSelected: boolean;
-  credit: number;
-  paymentDate: Date;
-  scheduledPayment: number;
-  interest: number;
-  finalBalance: number;
-  identification: number;
-  name: string;
-  lastName: string;
-  typeCredit: string;
-  extraPayment: number;
-  totalPayment: number;
-  capital: number;
-  interestPayment: number;
-};
+  installmentNumber: number
+  isSelected: boolean
+  credit: number
+  paymentDate: Date
+  scheduledPayment: number
+  interest: number
+  finalBalance: number
+  identification: number
+  name: string
+  lastName: string
+  typeCredit: string
+  extraPayment: number
+  totalPayment: number
+  capital: number
+  interestPayment: number
+}

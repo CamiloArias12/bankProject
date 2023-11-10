@@ -1,5 +1,5 @@
-import { useQuery, gql } from '@apollo/client';
-import Modal from '../../modal/Modal';
+import { useQuery, gql } from '@apollo/client'
+import Modal from '../../modal/Modal'
 
 const GET_CREDIT = gql`
   query getCredit($id: Int!) {
@@ -32,18 +32,18 @@ const GET_CREDIT = gql`
       }
     }
   }
-`;
+`
 
 function ViewThird({
   thirdIdentification,
-  setShow,
+  setShow
 }: {
-  thirdIdentification: number;
-  setShow: any;
+  thirdIdentification: number
+  setShow: any
 }) {
   const { data, loading, error } = useQuery(GET_CREDIT, {
-    variables: { id: thirdIdentification },
-  });
+    variables: { id: thirdIdentification }
+  })
 
   if (error) {
     return (
@@ -51,18 +51,18 @@ function ViewThird({
         size="h-[100px] w-[300px]"
         title="Error"
         onClick={() => setShow(false)}
-
-      >HJ</Modal>
-    );
+      >
+        HJ
+      </Modal>
+    )
   }
   return (
     <Modal
       size="h-[90%] w-[90%]"
       title="Tercero"
       onClick={() => setShow(false)}
-    >
-    </Modal>
-  );
+    ></Modal>
+  )
 }
 
-export default ViewThird;
+export default ViewThird

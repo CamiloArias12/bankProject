@@ -1,38 +1,36 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 export function useSaving() {
-
-//@ts-ignore
+  //@ts-ignore
   const [saving, setSaving] = useState({
     openingDate: new Date(),
     interestRate: '',
     clientId: '',
-    nameClient:'',
-  });
+    nameClient: ''
+  })
   const handleSaving = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value } = event.target;
-    setSaving((prevData) => ({ ...prevData, [name]: value }));
-  };
+    const { name, value } = event.target
+    setSaving(prevData => ({ ...prevData, [name]: value }))
+  }
   const handleSavingSelect = (name: string, value: any) => {
-    console.log(name, value);
-    setSaving((prevData) => ({ ...prevData, [name]: value }));
-  };
+    setSaving(prevData => ({ ...prevData, [name]: value }))
+  }
 
   const handleSavingNumber = (name: string, value: any) => {
     if (!isNaN(Number(value))) {
-      setSaving((prevData) => ({ ...prevData, [name]: Number(value) }));
-      return true;
+      setSaving(prevData => ({ ...prevData, [name]: Number(value) }))
+      return true
     }
-    return false;
-  };
+    return false
+  }
 
   return {
     saving,
     handleSaving,
     handleSavingSelect,
     handleSavingNumber,
-    setSaving,
-  };
+    setSaving
+  }
 }

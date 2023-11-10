@@ -6,6 +6,6 @@ function HomeLogo({ color }: { color: string }) {
         fill={color}
       />
     </svg>
-  );
+  )
 }
-export default HomeLogo;
+export default HomeLogo

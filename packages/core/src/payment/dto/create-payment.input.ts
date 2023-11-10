@@ -1,14 +1,13 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { InputType, Int, Field } from "@nestjs/graphql";
 
 @InputType()
 export class CreatePaymentInput {
+  @Field({ nullable: true })
+  value: number;
 
-   @Field({nullable:true})
-   value:number
-   
-   @Field()
-   id:number
-   
-   @Field({nullable:true})
-   credit:number
+  @Field()
+  id: number;
+
+  @Field({ nullable: true })
+  credit: number;
 }

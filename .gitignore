@@ -1,4 +1,5 @@
 # compiled output
+.next/
 .env
 /dist
 /node_modules

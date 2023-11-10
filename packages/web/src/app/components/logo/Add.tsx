@@ -9,5 +9,5 @@ export function AddSvg({ color }: { color: string }) {
     >
       <path stroke={color} strokeWidth={2} d="M16 25V7M7 16h18" />
     </svg>
-  );
+  )
 }

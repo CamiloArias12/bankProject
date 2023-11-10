@@ -17,6 +17,6 @@ function WalletLogo({ color }: { color: string }) {
         />
       </g>
     </svg>
-  );
+  )
 }
-export default WalletLogo;
+export default WalletLogo

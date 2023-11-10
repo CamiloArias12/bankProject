@@ -1,10 +1,8 @@
-import { TypeAccounnt } from '../type-account/types';
+import { TypeAccounnt } from '../type-account/types'
 
-export type Branch= {
-  id: number;
-  name: string;
-  address:string
-  phoneNumber:string
-};
-
-
+export type Branch = {
+  id: number
+  name: string
+  address: string
+  phoneNumber: string
+}

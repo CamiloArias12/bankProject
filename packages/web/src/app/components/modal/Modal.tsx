@@ -1,12 +1,12 @@
-'use client';
-import { motion } from 'framer-motion';
-import Button from '../input/Button';
+'use client'
+import { motion } from 'framer-motion'
+import Button from '../input/Button'
 
 interface ModalProps {
-  title: string;
-  children?: React.ReactNode;
-  size: string;
-  onClick: any;
+  title: string
+  children?: React.ReactNode
+  size: string
+  onClick: any
 }
 
 function Modal({ title, children, onClick, size }: ModalProps) {
@@ -30,7 +30,7 @@ function Modal({ title, children, onClick, size }: ModalProps) {
         <div className="flex-grow max-h-[90%]">{children}</div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Modal;
+export default Modal

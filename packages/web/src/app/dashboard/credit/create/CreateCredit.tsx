@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import InputField from '@/app/components/input/InputField';
-import { useEffect, useState } from 'react';
-import { gql, useMutation } from '@apollo/client';
-import Button from '@/app/components/input/Button';
-import TableAmortization from '@/app/components/forms/credit/TableAmortization';
-import { AmortizationTable } from '@/lib/utils/credit/types';
-import { optionsCredit } from '@/lib/utils/credit/options';
-import { useCredit } from '@/app/hooks/credit/CreditInput';
-import { useRouter } from 'next/navigation';
-import AlertModalSucces from '@/app/components/modal/AlertModalSucces';
-import AlertModalError from '@/app/components/modal/AlertModalError';
-import InputCalendar from '@/app/components/input/Calendar';
-import InputNumber from '@/app/components/input/InputNumber';
-import SelectClient from '@/app/components/input/SelectClient';
+import InputField from '@/app/components/input/InputField'
+import { useEffect, useState } from 'react'
+import { gql, useMutation } from '@apollo/client'
+import Button from '@/app/components/input/Button'
+import TableAmortization from '@/app/components/forms/credit/TableAmortization'
+import { AmortizationTable } from '@/lib/utils/credit/types'
+import { optionsCredit } from '@/lib/utils/credit/options'
+import { useCredit } from '@/app/hooks/credit/CreditInput'
+import { useRouter } from 'next/navigation'
+import AlertModalSucces from '@/app/components/modal/AlertModalSucces'
+import AlertModalError from '@/app/components/modal/AlertModalError'
+import InputCalendar from '@/app/components/input/Calendar'
+import InputNumber from '@/app/components/input/InputNumber'
+import SelectClient from '@/app/components/input/SelectClient'
 
 const GENERATE_TABLE_AMORTIZATION = gql`
   mutation (
@@ -39,101 +39,95 @@ const GENERATE_TABLE_AMORTIZATION = gql`
       finalBalance
     }
   }
-`;
+`
 const CREATE_CREDIT = gql`
   mutation ($create: CreateCreditInput!) {
     createCredit(createCreditInput: $create) {
       id
       startDate
       state
-     }
+    }
   }
-`;
-export const revalidate = 0;
+`
+export const revalidate = 0
 function FormCredit({
   clients,
-  creditType,
+  creditType
 }: {
-  clients: any;
-  creditType: any;
-  accounts?: any;
+  clients: any
+  creditType: any
+  accounts?: any
 }) {
   const { credit, handleCreditNumber, handleCreditSelect, handleCredit } =
-    useCredit();
+    useCredit()
 
-  const [data, setData] = useState<AmortizationTable[]>([]);
+  const [data, setData] = useState<AmortizationTable[]>([])
   const [
     generateAmortizationTable,
     {
       data: dataAmortization,
       loading: loadingAmortization,
-      error: errorAmortization,
-    },
-  ] = useMutation(GENERATE_TABLE_AMORTIZATION);
-   const [
+      error: errorAmortization
+    }
+  ] = useMutation(GENERATE_TABLE_AMORTIZATION)
+  const [
     createCredit,
-    { data: dataCreate, loading: loadingCreate, error: errorCreate },
-  ] = useMutation(CREATE_CREDIT);
-  const [showWarning, setShowWarning] = useState(false);
-  const route = useRouter();
+    { data: dataCreate, loading: loadingCreate, error: errorCreate }
+  ] = useMutation(CREATE_CREDIT)
+  const [showWarning, setShowWarning] = useState(false)
+  const route = useRouter()
 
   const handleCreateCredit = () => {
     const create = {
       creditValue: credit.creditValue,
       interest: credit.interest,
       startDate: credit.startDate,
-      clientId:Number( credit.identification),
-      installments: data,
-    };
+      clientId: Number(credit.identification),
+      installments: data
+    }
     createCredit({
       variables: {
-        create: create,
+        create: create
       }
-    });
-
-  };
+    })
+  }
 
   const handleGenerateTable = () => {
-    setShowWarning(true);
-      generateAmortizationTable({
-        variables: {
-          date: credit.startDate,
-          creditValue: credit.creditValue,
-          interest: credit.interest,
-          installments: credit.installments,
-        },
-      })
-     };
+    setShowWarning(true)
+    generateAmortizationTable({
+      variables: {
+        date: credit.startDate,
+        creditValue: credit.creditValue,
+        interest: credit.interest,
+        installments: credit.installments
+      }
+    })
+  }
 
-
-   
   useEffect(() => {
-   if(dataAmortization){
+    if (dataAmortization) {
       setData(dataAmortization.amortizationTableGenerate)
-      handleCreditNumber('installments', data.length);
-   }
-   
-  },[dataAmortization])
-  
+      handleCreditNumber('installments', data.length)
+    }
+  }, [dataAmortization])
+
   useEffect(() => {
     if (data) {
       const timeout = setTimeout(() => {
-        setShowWarning(false);
-      }, 2000); // 3 seconds in milliseconds
+        setShowWarning(false)
+      }, 2000) // 3 seconds in milliseconds
 
       return () => {
-        clearTimeout(timeout);
-      };
+        clearTimeout(timeout)
+      }
     }
-  }, [dataCreate, errorCreate]);
-
+  }, [dataCreate, errorCreate])
 
   if (dataCreate?.createCredit && !showWarning) {
-    route.push('/dashboard/credit');
-    route.refresh();
+    route.push('/dashboard/credit')
+    route.refresh()
   }
 
-  console.log(credit)
   return (
     <div className=" flex-grow flex flex-col  ">
       <div className="flex justify-between ">
@@ -147,7 +141,7 @@ function FormCredit({
           <div className=" flex-grow flex flex-row">
             <div className="flex-grow flex flex-col pr-2 ">
               <label className="text-center text-white  bg-[#054818] text-input font-bold mb-2">
-               Cliente 
+                Cliente
               </label>
               <div className=" flex flex-grow  flex-row">
                 <SelectClient
@@ -157,43 +151,40 @@ function FormCredit({
                   options={clients}
                   setValue={handleCreditSelect}
                 />
-		<InputField
-		     label="Nombres"
-		     name="name"
-		     value={credit.nameClient}
-		     onlyRead={true}
-
-		     />
-
-                             </div>
-            
-                         </div>
+                <InputField
+                  label="Nombres"
+                  name="name"
+                  value={credit.nameClient}
+                  onlyRead={true}
+                />
+              </div>
             </div>
           </div>
-          <div className="flex-grow flex flex-col mt-2  ">
-            <label className="text-center text-white  bg-[#054818]   text-input font-bold mb-2">
-              Datos crédito
-            </label>
-            <div className="flex-grow flex flex-row">
-               <InputCalendar
-                name="discountDate"
-                label="Fecha"
-                value={credit.startDate}
-                onChange={handleCreditSelect}
-              />
-	      <InputNumber
-	        label="Interes"
-                value={Number(credit.interest)}
-                name="interest"
-                handleChange={handleCreditSelect}
-		/>
-              <div className="flex flex-grow  flex-row">
-	       <InputNumber
-	        label="Valor"
+        </div>
+        <div className="flex-grow flex flex-col mt-2  ">
+          <label className="text-center text-white  bg-[#054818]   text-input font-bold mb-2">
+            Datos crédito
+          </label>
+          <div className="flex-grow flex flex-row">
+            <InputCalendar
+              name="discountDate"
+              label="Fecha"
+              value={credit.startDate}
+              onChange={handleCreditSelect}
+            />
+            <InputNumber
+              label="Interes"
+              value={Number(credit.interest)}
+              name="interest"
+              handleChange={handleCreditSelect}
+            />
+            <div className="flex flex-grow  flex-row">
+              <InputNumber
+                label="Valor"
                 value={Number(credit.creditValue)}
                 name="creditValue"
                 handleChange={handleCreditSelect}
-		/>
+              />
 
               <InputField
                 label="Número de coutas"
@@ -213,7 +204,7 @@ function FormCredit({
           </div>
         </div>
         <div className="pt-2 flex justify-end mr-4 ">
-         <button
+          <button
             className="flex flex-row rounded-sm bg-[#F2FFA5] p-2 "
             onClick={handleGenerateTable}
           >
@@ -250,7 +241,7 @@ function FormCredit({
         )}
       </div>
     </div>
-  );
+  )
 }
 
-export default FormCredit;
+export default FormCredit

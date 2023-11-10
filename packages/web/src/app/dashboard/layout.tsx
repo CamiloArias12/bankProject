@@ -1,10 +1,10 @@
-import HeaderModule from '../components/header/HeaderModule';
-import SideBar from '../components/sidebar/Sidebar';
+import HeaderModule from '../components/header/HeaderModule'
+import SideBar from '../components/sidebar/Sidebar'
 
 export default function DashboardLayout({
-  children,
+  children
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <div className="flex flex-row h-screen  ">
@@ -24,5 +24,5 @@ export default function DashboardLayout({
         </section>
       </div>
     </div>
-  );
+  )
 }

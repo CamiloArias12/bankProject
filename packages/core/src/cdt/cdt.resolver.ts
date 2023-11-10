@@ -18,11 +18,10 @@ export class CdtResolver {
   async findAllCdt() {
     return await this.cdtService.findAll();
   }
-@Query(() => [ViewCdt])
+  @Query(() => [ViewCdt])
   async findAllCdtByClient(
-      @Args("identification") identification:number
+    @Args("identification") identification: number,
   ): Promise<ViewCdt[]> {
-
     return await this.cdtService.findAllByClient(identification);
   }
   @Query(() => Cdt)
@@ -30,18 +29,18 @@ export class CdtResolver {
     return this.cdtService.findOne(id);
   }
 
- @Mutation(() => Boolean)
+  @Mutation(() => Boolean)
   updateCdt(
     @Args("inputCdt")
-      inputUser:CreateCdtInput,
-   @Args("id")
-      id:number
+    inputUser: CreateCdtInput,
+    @Args("id")
+    id: number,
   ) {
-    return this.cdtService.update(id,inputUser);
+    return this.cdtService.update(id, inputUser);
   }
 
   @Mutation(() => Boolean)
-   async deleteCdt(@Args("id", { type: () => Int }) id: number) {
+  async deleteCdt(@Args("id", { type: () => Int }) id: number) {
     return this.cdtService.delete(id);
   }
 }

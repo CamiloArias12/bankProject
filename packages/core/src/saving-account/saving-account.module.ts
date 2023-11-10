@@ -6,9 +6,8 @@ import { SavingAccount } from "./entities/saving-account.entity";
 import { UserModule } from "src/user/user.module";
 
 @Module({
-
-   imports:[TypeOrmModule.forFeature([SavingAccount]),UserModule],
-   providers: [SavingAccountResolver, SavingAccountService],
-   exports:[SavingAccountService]
+  imports: [TypeOrmModule.forFeature([SavingAccount]), UserModule],
+  providers: [SavingAccountResolver, SavingAccountService],
+  exports: [SavingAccountService],
 })
 export class SavingAccountModule {}

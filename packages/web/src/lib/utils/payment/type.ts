@@ -1,12 +1,9 @@
+export type Payment = {
+  id: number
 
+  type: string
 
-export type Payment ={
+  value: number
 
-   id:number
- 
-   type:string
-
-   value:number
-
-   date:Date
+  date: Date
 }

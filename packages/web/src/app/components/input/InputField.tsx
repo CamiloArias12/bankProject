@@ -1,16 +1,16 @@
-'use client';
-import React, { useState } from 'react';
+'use client'
+import React, { useState } from 'react'
 
 type InputFieldProps = {
-  name?: string;
-  type?: string;
-  label: string;
-  value?: string | number;
-  onBlur?: any;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onlyRead?: boolean;
-  className?:string
-};
+  name?: string
+  type?: string
+  label: string
+  value?: string | number
+  onBlur?: any
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onlyRead?: boolean
+  className?: string
+}
 
 function InputField({
   className,
@@ -20,15 +20,15 @@ function InputField({
   value,
   onChange,
   onBlur,
-  onlyRead,
+  onlyRead
 }: InputFieldProps) {
-  const [color, setColor] = useState(false);
+  const [color, setColor] = useState(false)
 
   return (
     <div className={`flex pr-2 flex-grow flex-col ${className} text-input `}>
       <label className={`pb-2 `}>{label}</label>
       <input
-        type={type ? type : "text"}
+        type={type ? type : 'text'}
         name={name}
         value={value}
         readOnly={onlyRead}
@@ -38,17 +38,17 @@ function InputField({
         onChange={onChange}
         onBlur={() => {
           if (onBlur !== undefined) {
-            console.log('asfsadjkf');
+            console.log('asfsadjkf')
             if (!onBlur(name, value)) {
-              setColor(true);
+              setColor(true)
             } else {
-              setColor(false);
+              setColor(false)
             }
           }
         }}
       />
     </div>
-  );
+  )
 }
 
-export default InputField;
+export default InputField

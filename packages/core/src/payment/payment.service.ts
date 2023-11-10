@@ -14,79 +14,81 @@ import { StateCredit } from "src/credit/dto/enum-types";
 import { StateInstallment } from "src/credit/installments/dto/enum-types";
 
 @Injectable()
-export class PaymentService{
- constructor (
-      @InjectRepository(PaymentAccount)
-      private readonly paymentAccountRepository:Repository<PaymentAccount>,
-      @InjectRepository(PaymentCredit)
-      private readonly paymentCreditRepository:Repository<PaymentCredit>,
-      @InjectRepository(PaymentCdt)
-      private readonly paymentCdtRepository:Repository<PaymentCdt>,
-      private readonly creditService:CreditService,
-      private readonly cdtService:CdtService,
-      private readonly installmentService:InstallmentsService,
-      private readonly savingAccountService:SavingAccountService,
-   ){}
+export class PaymentService {
+  constructor(
+    @InjectRepository(PaymentAccount)
+    private readonly paymentAccountRepository: Repository<PaymentAccount>,
+    @InjectRepository(PaymentCredit)
+    private readonly paymentCreditRepository: Repository<PaymentCredit>,
+    @InjectRepository(PaymentCdt)
+    private readonly paymentCdtRepository: Repository<PaymentCdt>,
+    private readonly creditService: CreditService,
+    private readonly cdtService: CdtService,
+    private readonly installmentService: InstallmentsService,
+    private readonly savingAccountService: SavingAccountService,
+  ) {}
 
- async  createPaymentCdt(data:CreatePaymentInput):Promise<Boolean> {
+  async createPaymentCdt(data: CreatePaymentInput): Promise<Boolean> {
     try {
-	 const cdt=await this.cdtService.findOne(data.id) 
+      const cdt = await this.cdtService.findOne(data.id);
 
-	 const paymentCdt=new PaymentCdt()
-	 paymentCdt.value=data.value
-	 paymentCdt.date=new Date()
-	 paymentCdt.cdt=cdt
-	 await this.paymentCdtRepository.save(paymentCdt)
-	 return true;
+      const paymentCdt = new PaymentCdt();
+      paymentCdt.value = data.value;
+      paymentCdt.date = new Date();
+      paymentCdt.cdt = cdt;
+      await this.paymentCdtRepository.save(paymentCdt);
+      return true;
     } catch (e) {
-	 return false;
-    
+      return false;
     }
-   }
-async  createPaymentCredit(data:CreatePaymentInput):Promise<Boolean> {
+  }
+  async createPaymentCredit(data: CreatePaymentInput): Promise<Boolean> {
     try {
-	 const installment=await this.installmentService.finOneByCreditAndNumberInstallment(data.id,data.credit) 
-	 const paymentCredit=new PaymentCredit()
-	 if(data.credit===1){
-	    await this.creditService.updateState(data.id,StateCredit.CURSO)
-	 }
-	 await this.installmentService.updateState(data.credit,data.id,StateInstallment.PAGADA)
-	 paymentCredit.value=installment.totalPayment
-	 paymentCredit.installment=installment
-	 paymentCredit.date=new Date()
-	 await this.paymentCreditRepository.save(paymentCredit)
-	 return true;
+      const installment =
+        await this.installmentService.finOneByCreditAndNumberInstallment(
+          data.id,
+          data.credit,
+        );
+      const paymentCredit = new PaymentCredit();
+      if (data.credit === 1) {
+        await this.creditService.updateState(data.id, StateCredit.CURSO);
+      }
+      await this.installmentService.updateState(
+        data.credit,
+        data.id,
+        StateInstallment.PAGADA,
+      );
+      paymentCredit.value = installment.totalPayment;
+      paymentCredit.installment = installment;
+      paymentCredit.date = new Date();
+      await this.paymentCreditRepository.save(paymentCredit);
+      return true;
     } catch (e) {
-	 return false;
+      return false;
     }
-   }
+  }
 
-async  createPaymentAccount(data:CreatePaymentInput) :Promise<Boolean> {
+  async createPaymentAccount(data: CreatePaymentInput): Promise<Boolean> {
     try {
-	 const savingAccount=await this.savingAccountService.findOne(data.id) 
-	 const paymentAccount=new PaymentAccount()
-	 paymentAccount.value=data.value
-	 paymentAccount.date=new Date()
-	 paymentAccount.saving_accounts=savingAccount
-	 await this.paymentAccountRepository.save(paymentAccount)
-	 return true;
+      const savingAccount = await this.savingAccountService.findOne(data.id);
+      const paymentAccount = new PaymentAccount();
+      paymentAccount.value = data.value;
+      paymentAccount.date = new Date();
+      paymentAccount.saving_accounts = savingAccount;
+      await this.paymentAccountRepository.save(paymentAccount);
+      return true;
     } catch (e) {
-	 return false;
+      return false;
     }
-   }
+  }
 
-
-async findAllPaymentCdt(){
-    return await this.paymentCdtRepository.find()
-
-}
-async findAllPaymentCredit(){
-   return await this.paymentCreditRepository.find()
-
-}
-async findAllPaymentAccount(){
-   return await this.paymentAccountRepository.find()
-
-}
-
+  async findAllPaymentCdt() {
+    return await this.paymentCdtRepository.find();
+  }
+  async findAllPaymentCredit() {
+    return await this.paymentCreditRepository.find();
+  }
+  async findAllPaymentAccount() {
+    return await this.paymentAccountRepository.find();
+  }
 }
