@@ -21,15 +21,14 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const session = await getServerSession(authOptions);
-
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AuthProvider session={session}>
-          <ClientCookiesProvider value={cookies().getAll()}>
+        <ClientCookiesProvider value={cookies().getAll()}>
+          <AuthProvider session={session}>
             <ApolloWrapper>{children}</ApolloWrapper>
-          </ClientCookiesProvider>
-        </AuthProvider>
+          </AuthProvider>
+        </ClientCookiesProvider>
       </body>
     </html>
   )

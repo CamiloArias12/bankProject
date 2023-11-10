@@ -21,6 +21,7 @@ import { useCdt } from '@/app/hooks/cdt/CdtInput'
 import { CdtUpdate } from './UpdateCdt'
 import { useCookies } from 'next-client-cookies'
 import { Role } from '@/lib/utils/user/types'
+import { useSession } from 'next-auth/react'
 
 const DELETE_BRANCH = gql`
   mutation ($id: Int!) {
@@ -102,8 +103,8 @@ function TableCdt({
     overscan: 12
   })
   const { virtualItems: virtualRows } = rowVirtualizer
-  const cookies = useCookies()
-  const dataRole = cookies.get('role')
+  const { data: session } = useSession();
+  const dataRole = session.user.role;
   const [idrow, setIdRow] = useState<string>('')
   const [expanded, setExpanded] = useState<boolean>(false)
   const [update, setUpdate] = useState<boolean>(false)

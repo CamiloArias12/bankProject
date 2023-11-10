@@ -3,9 +3,9 @@ import { motion } from 'framer-motion'
 
 function AlertModalSucces({ value }: { value: string }) {
   return (
-    <div className="fixed top-2 left-1/2 transform -translate-x-1/2 w-screen flex items-center justify-center z-50">
+    <div className="fixed bottom-1 left-1/2 transform -translate-x-1/2 w-screen flex items-center justify-center z-50">
       <motion.div
-        className={`flex flex-row rounded-sm shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]  p-4 bg-[#BAFFCD] `}
+        className={`flex`}
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}

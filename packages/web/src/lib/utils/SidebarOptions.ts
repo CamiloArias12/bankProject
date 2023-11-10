@@ -12,25 +12,25 @@ export enum MenuSidebar {
 
 export const SideBarModules = [
   {
-    name: 'Inicio',
+    name: 'Home',
     href: '/dashboard',
     menu: MenuSidebar.main,
     role: [Role.EMPLOYEE, Role.CLIENT]
   },
 
   {
-    name: 'Sucursales',
+    name: 'Branch Office',
     href: '/dashboard/branches',
     menu: MenuSidebar.branches,
     role: [Role.EMPLOYEE]
   },
   {
-    name: 'Usuarios',
+    name: 'Users',
     href: '/dashboard/users',
     menu: MenuSidebar.thirds,
     role: [Role.EMPLOYEE]
   },
-  {
+  /*{
     name: 'CDT',
     href: '/dashboard/cdts',
     menu: MenuSidebar.cdt,
@@ -53,5 +53,5 @@ export const SideBarModules = [
     href: '/dashboard/payment',
     menu: MenuSidebar.users,
     role: [Role.EMPLOYEE]
-  }
+  }*/
 ]

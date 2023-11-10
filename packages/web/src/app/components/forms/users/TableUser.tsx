@@ -1,22 +1,20 @@
 import {
   ColumnDef,
-  Row,
   SortingState,
-  flexRender,
   getCoreRowModel,
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { AddSvg } from '../../logo/Add'
 import { useRouter } from 'next/navigation'
 import { useVirtual } from 'react-virtual'
-import { motion } from 'framer-motion'
 import { gql, useMutation } from '@apollo/client'
 import AlertModalSucces from '../../modal/AlertModalSucces'
 import AlertModalError from '../../modal/AlertModalError'
 import { UserUpdate } from './UpdateUser'
 import { User } from '@/lib/utils/user/types'
+import { CrossCircledIcon, Pencil1Icon, PlusIcon } from '@radix-ui/react-icons'
+import { Button } from '@nextui-org/react'
 
 const DELETE_USER = gql`
   mutation ($id: Int!) {
@@ -135,134 +133,41 @@ function TableUser({
       {update && (
         <UserUpdate selected={selected} setShowModalUpdate={setUpdate} />
       )}
-      <div className="flex fleCuentasx-grow flex-col bg-white rounded-tr-[20px] rounded-b-[20px] ">
-        <div className="flex items-center justify-between m-3  ">
-          <div>
-            {showOptions && (
-              <div className="flex flex-row p-2 rounded-[40px] bg-[#F2F5FA] ">
-                <button
-                  className="flex flex-row"
-                  onClick={() => {
-                    setUpdate(true)
-                  }}
-                >
-                  <img src="/edit.svg" />
-                  <label className="font-sans px-6 text-sm">Editar</label>
-                </button>
-                <button
-                  className="flex flex-row"
-                  onClick={() => {
-                    deleteUserHandle()
-                  }}
-                >
-                  <img src="/delete.svg" />
-                  <label className="font-sans px-6 text-sm">Eliminar</label>
-                </button>
-              </div>
-            )}
-          </div>
+      <div className="flex flex-col gap-10">
+        <div className='flex flex-wrap gap-5 w-full bg-ski-500'>
+          <Button className='w-36 h-36 bg-slate-800' onClick={() => setShowModalCreate(true)}>
+            <PlusIcon color='white' />
+          </Button>
+          {
+            users.map((user, index) => {
+              return (
+                <div>
+                  {
+                    user.identification === selected &&
+                    <div className='flex flex-row flex-row-reverse gap-5 my-1'>
+                      <CrossCircledIcon onClick={() => deleteUserHandle()} />
+                      <Pencil1Icon onClick={() => setUpdate(true)} />
+                    </div>
+                  }
+                  <Button key={index} onClick={() => { setSelected(user.identification) }} className='flex flex-col w-36 h-36 shadow p-2 hover:bg-sky-100 shadow rounded-xl'
+                    style={{
+                      background: user.identification === selected ? '#ecfeff' : '#ecfeff',
+                      color: user.identification === selected ? '#020617' : '',
+                      border: user.identification === selected ? '1px solid black' : 'none'
+                    }}
+                  >
+                    <span className='font-bold text-xl'>{user.name}</span>
+                    <span>{user.name}</span>
+                    <span>{user.phone}</span>
+                    <span>{user.email}</span>
+                    <span>{user.lastName}</span>
+                  </Button>
+                </div>
+              );
+            })
+          }
 
-          <div
-            className="flex flex-row items-center justify-between hover:bg-[#F5F2F2] hover:rounded-[20px] group p-1"
-            onClick={() => {
-              setShowModalCreate(true)
-            }}
-          >
-            <div className="flex group-hover:text-blue items-center justify-center rounded-[50%] h-8 w-8  bg-[#054818]  ">
-              <AddSvg color="#ffffff" />
-            </div>
-            <label className="pl-2 hidden group-hover:block text-[12px]">
-              Crear
-            </label>
-          </div>
-        </div>
 
-        <div className="mx-4 my-2 flex-grow text-sm">
-          <table className="w-full table-fixed table ">
-            <thead className="font-medium border-b-2 bg-[#F2F5FA] border-b-[#3C7AC2]">
-              {table.getHeaderGroups().map(headerGroup => (
-                <tr className="rounded-lg" key={headerGroup.id}>
-                  {headerGroup.headers.map(header => {
-                    return (
-                      <th
-                        className="text-start font-light pl-3 p-2 font-medium "
-                        key={header.id}
-                        colSpan={header.colSpan}
-                        style={{ width: header.getSize() }}
-                      >
-                        {header.isPlaceholder ? null : (
-                          <div
-                            {...{
-                              className: header.column.getCanSort()
-                                ? 'cursor-pointer select-none'
-                                : '',
-                              onClick: header.column.getToggleSortingHandler()
-                            }}
-                          >
-                            {flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
-                            {{
-                              asc: ' 🔼',
-                              desc: ' 🔽'
-                            }[header.column.getIsSorted() as string] ?? null}
-                          </div>
-                        )}
-                      </th>
-                    )
-                  })}
-                </tr>
-              ))}
-            </thead>
-            <tbody className=" ">
-              {virtualRows.map(virtualRow => {
-                const row = rows[virtualRow.index] as Row<any>
-                return (
-                  <>
-                    <motion.tr
-                      key={row.id}
-                      className=" hover:border-l-4  hover:border-l-[#3C7AC2] "
-                    >
-                      {row.getVisibleCells().map(cell => {
-                        return (
-                          <>
-                            <td
-                              onClick={() => {
-                                setShowOptions(true)
-                                if (!update) {
-                                  setSelected(
-                                    Number(row._valuesCache.identification)
-                                  )
-                                }
-                                if (update === false) {
-                                  if (idrow == row.id) {
-                                    setIdRow(row.id)
-                                    setExpanded(!expanded)
-                                  } else {
-                                    setExpanded(false)
-                                    setIdRow(row.id)
-                                    setExpanded(!true)
-                                  }
-                                }
-                              }}
-                              className="font-light px-2 py-2"
-                              key={cell.id}
-                            >
-                              {flexRender(
-                                cell.column.columnDef.cell,
-                                cell.getContext()
-                              )}
-                            </td>
-                          </>
-                        )
-                      })}
-                    </motion.tr>
-                  </>
-                )
-              })}
-            </tbody>
-          </table>
         </div>
       </div>
       {deleteData?.deleteUser && showWarning ? (

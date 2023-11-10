@@ -112,9 +112,9 @@ function TableBranch({
       </div>
 
       {deleteData?.deleteBranch && showWarning ? (
-        <AlertModalSucces value="Se han eliminado el tipo de ahorro" />
+        <AlertModalSucces value="The branch has been deleted." />
       ) : deleteData?.deleteBranch === false && showWarning ? (
-        <AlertModalError value="La sucursal no se puede eliminar" />
+        <AlertModalError value="The branch office cannot be deleted" />
       ) : (
         errorDelete && showWarning && <AlertModalError value="Error" />
       )}

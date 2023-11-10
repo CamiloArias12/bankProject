@@ -74,7 +74,7 @@ export function CdtCreate({ setShowModalCreate }: { setShowModalCreate: any }) {
   return (
     <Modal
       size="min-w-[550px] w-[600px]"
-      title="Crear sucursal"
+      title="Create branch office"
       onClick={() => {
         setShowModalCreate(false)
       }}

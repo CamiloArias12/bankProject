@@ -1,13 +1,11 @@
-import { gql } from '@apollo/client'
-import { getClient } from '@/lib/graphql/apollo-client-server'
+"use client"
+import { gql, useLazyQuery, useQuery } from '@apollo/client'
 import Credits from './Credits'
 import { Credit } from '@/lib/utils/credit/types'
-import { getCookies } from 'next-client-cookies/server'
 import { Role } from '@/lib/utils/user/types'
+import { useSession } from 'next-auth/react'
 
-export const revalidate = 0
-
-async function getCredits(): Promise<Credit[]> {
+function getCredits(): Credit[] {
   const CREDITS = gql`
     query {
       findAllCredit {
@@ -22,12 +20,12 @@ async function getCredits(): Promise<Credit[]> {
       }
     }
   `
-  const { data } = await getClient().query({ query: CREDITS })
-
-  return data.findAllCredit
+  const [load, { data}] = useLazyQuery(CREDITS);
+  load();
+  return data
 }
 
-async function getCreditsClient(identification: number): Promise<Credit[]> {
+function getCreditsClient(identification: number): Credit[] {
   const CREDITS_CLIENT = gql`
     query ($identification: Float!) {
       findAllCreditByClient(identification: $identification) {
@@ -42,22 +40,23 @@ async function getCreditsClient(identification: number): Promise<Credit[]> {
       }
     }
   `
-  const { data } = await getClient().query({
-    query: CREDITS_CLIENT,
+  const [load, {data}] = useLazyQuery(
+    CREDITS_CLIENT, {
     variables: { identification: identification }
   })
 
-  return data.findAllCreditByClient
+  load();
+  return data
 }
 
-async function PageCredit() {
-  const cookies = getCookies()
-  const data = cookies.get('role')
-  const identification = cookies.get('data')
+function PageCredit() {
+  const {data: session} = useSession();
+  const data = session.user.role;
+  const identification = session.user.identification
   const credits: Credit[] =
     data === Role.EMPLOYEE
-      ? await getCredits()
-      : await getCreditsClient(Number(identification))
+      ? getCredits()
+      : getCreditsClient(Number(identification))
   return (
     <>
       <Credits credits={credits} />

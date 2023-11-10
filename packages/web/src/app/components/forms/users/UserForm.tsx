@@ -1,9 +1,7 @@
 'use client'
-import InputField from '@/app/components/input/InputField'
-import Button from '../../input/Button'
-import InputNumber from '../../input/InputNumber'
 import { gql, useQuery } from '@apollo/client'
 import SelectField from '../../input/SelectField'
+import { Button, Input, Select, SelectItem } from '@nextui-org/react'
 
 const GET_BRANCHES = gql`
   query {
@@ -30,70 +28,71 @@ export function UserForm({
   const { data: dataBranches, refetch: querySubAccount } =
     useQuery(GET_BRANCHES)
   return (
-    <>
-      <InputNumber
-        handleChange={handleChange}
+    <div className='flex flex-col gap-5'>
+     <Input
+        onValueChange={(d) => handleChange('identification', Number(d))}
         name="identification"
         value={user.identification}
         label="Idenficacion"
       />
 
-      <InputField
+      <Input
         name="name"
-        label="Nombres"
+        label="First name"
         value={user.name}
-        onChange={handleUser}
+        onValueChange={(d) => handleChange('name', d)}
       />
-      <InputField
+      <Input
         name="lastName"
-        label="Apellidos"
+        label="Last name"
         value={user.lastName}
-        onChange={handleUser}
+        onValueChange={(d) => handleChange('lastName', d)}
       />
-      <InputField
+      <Input
         name="email"
-        label="Correo"
+        label="Email"
         value={user.email}
-        onChange={handleUser}
+        onValueChange={(d) => handleChange('email', d)}
       />
-      <InputField
+      <Input
         name="phone"
-        label="Telefono"
+        label="Phone number"
         value={user.phone}
-        onChange={handleUser}
+        onValueChange={(d) => handleChange('phone', d)}
       />
-      <InputField
+      <Input
         name="password"
-        label="Contrasena"
+        label="Password"
         value={user.password}
         type="password"
-        onChange={handleUser}
+        onValueChange={(d) => handleChange('password', d)}
       />
-      <SelectField
-        name="idBranch"
-        label="Sucursal"
-        value={user.idBranch}
-        options={dataBranches?.findAllBranch}
-        handleGeneralInformation={handleChange}
-      />
+      <Select
+        label="Branch office"
+        onChange={d => handleChange('idBranch', Number(d.target.value))}
+      >
+        {
+          dataBranches?.findAllBranch?.map((value) => {
+          return(
+            <SelectItem key={value.id} value={"h"}>{value.name}</SelectItem>
+          );
+        })
+        }
 
+      </Select>
       <div className="pt-10 flex justify-end">
         <div className="pr-4">
           <Button
-            name="Cancelar"
-            background="border  border-[#054818]  text-[#054818]  "
             onClick={onClickCancel}
-          />
+          >Cancel</Button>
         </div>
         <div className="pr-4">
           <Button
-            name="Aceptar"
-            background=" bg-[#054818]  text-white"
             onClick={onClickAccept}
-          />
+          >Done</Button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

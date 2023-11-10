@@ -64,7 +64,7 @@ export function BranchCreate({
   return (
     <Modal
       size="min-w-[550px] w-[600px]"
-      title="Crear sucursal"
+      title="Create branch"
       onClick={() => {
         setShowModalCreate(false)
       }}
@@ -78,7 +78,7 @@ export function BranchCreate({
           onClickCancel={() => {}}
         />
         {dataCreate?.createBranchOffice && showWarning ? (
-          <AlertModalSucces value={`la tipo de ahorro ha sido creado`} />
+          <AlertModalSucces value={`The branch has been created successfuly`} />
         ) : (
           dataCreate?.createBranch === false &&
           showWarning &&

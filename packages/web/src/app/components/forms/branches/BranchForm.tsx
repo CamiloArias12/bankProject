@@ -17,19 +17,19 @@ export function BranchForm({
       <div className="flex flex-col space-y-4 w-full">
         <Input
           name="name"
-          label="Nombre"
+          label="Branch name"
           value={branch.name}
           onChange={handleBranch}
         />
         <Input
           name="address"
-          label="Direccion"
+          label="Address"
           value={branch.address}
           onChange={handleBranch}
         />
         <Input
           name="phoneNumber"
-          label="Telefono"
+          label="Phone number"
           value={branch.phoneNumber}
           onChange={handleBranch}
         />
@@ -37,10 +37,10 @@ export function BranchForm({
         <div className="flex justify-end gap-2">
           <Button
             onClick={onClickCancel}
-          >Cancelar</Button>
+          >Cancel</Button>
           <Button
             onClick={onClickAccept}
-          >Aceptar</Button>
+          >Done</Button>
         </div>
       </div>
     </>

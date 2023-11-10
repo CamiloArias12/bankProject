@@ -1,6 +1,6 @@
 export enum TypeAccountEnum {
-  EMPLOYEE = 'Empleado',
-  CLIENT = 'Cliente'
+  EMPLOYEE = 'Admin',
+  CLIENT = 'client'
 }
 
 export const optionsUser = [

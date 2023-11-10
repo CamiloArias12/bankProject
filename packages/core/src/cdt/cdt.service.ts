@@ -45,6 +45,7 @@ export class CdtService {
     return query;
   }
   async findAll(): Promise<ViewCdt[]> {
+    console.log(await this.dataSource.manager.find(ViewCdt));
     return await this.dataSource.manager.find(ViewCdt);
   }
 

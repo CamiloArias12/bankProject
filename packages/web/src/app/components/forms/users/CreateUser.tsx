@@ -1,8 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import InputField from '@/app/components/input/InputField'
-import { gql, useMutation, useQuery } from '@apollo/client'
-import Button from '../../input/Button'
+import { gql, useMutation } from '@apollo/client'
 import { useRouter } from 'next/navigation'
 import AlertModalSucces from '../../modal/AlertModalSucces'
 import AlertModalError from '../../modal/AlertModalError'
@@ -10,6 +8,7 @@ import Modal from '../../modal/Modal'
 import UserForm from './UserForm'
 import { useUser } from '@/app/hooks/user/UserInput'
 import { optionsUser } from '@/lib/utils/user/options'
+import { Radio, RadioGroup } from '@nextui-org/react'
 
 const CREATE_CLIENT = gql`
   mutation ($create: CreateUserInput!) {
@@ -90,44 +89,33 @@ export function UserCreate({
   return (
     <Modal
       size="min-w-[550px] w-[600px]"
-      title="Crear usuario"
+      title="Create user"
       onClick={() => {
         setShowModalCreate(false)
       }}
     >
-      <div className="flex flex-col   w-full h-full">
-        <div className="flex flex-row bg-[#F2F6F8] mt-3 p-2 rounded-lg ">
+      <div className="flex flex-col w-full h-full">
+        <div className="flex flex-row gap-2 py-2">
+              <RadioGroup onValueChange={(d) => setIndexForm(d)}>
           {optionsUser.map(option => (
-            <div
-              key={option.id}
-              className="flex flex-row w-full items-center justify-center text-sm "
-              onClick={() => {
-                setIndexForm(option.id)
-              }}
-            >
-              <div
-                className={`h-5 w-5  rounded-[50%] border-2 border-[#054818] ${
-                  option.id === indexForm ? 'bg-[#054818]' : 'bg-white'
-                }`}
-              />
-              <label className="ml-2 mr-4">{option.name}</label>
-            </div>
+                <Radio value={option.id}>{option.name}</Radio>
           ))}
+              </RadioGroup>
         </div>
         <UserForm
           user={user}
           handleUser={handleUser}
           onClickAccept={handleCreateUser}
-          onClickCancel={() => {}}
+          onClickCancel={() => { }}
           handleChange={handleUserSelect}
         />
         {dataCreate?.createClient && showWarning ? (
-          <AlertModalSucces value={`El cliente ha sido creado`} />
+          <AlertModalSucces value={`The client has been created`} />
         ) : (
           errorCreate && showWarning && <AlertModalError value="Error" />
         )}
         {dataEmployee?.createEmployee && showWarning ? (
-          <AlertModalSucces value={`El empleado ha sido creado`} />
+          <AlertModalSucces value={`The admin has been created`} />
         ) : (
           errorCreate && showWarning && <AlertModalError value="Error" />
         )}

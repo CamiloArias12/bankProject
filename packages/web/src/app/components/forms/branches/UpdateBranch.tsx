@@ -77,7 +77,7 @@ export function BranchUpdate({
   return (
     <Modal
       size="min-w-[550px] w-[600px]"
-      title="Actualizar sucursal"
+      title="Update branch office"
       onClick={() => {
         setShowModalUpdate(false)
       }}
@@ -90,7 +90,7 @@ export function BranchUpdate({
           onClickCancel={() => {}}
         />
         {dataUpdate?.updateBranchOffice && showWarning ? (
-          <AlertModalSucces value={`Los datos han sido actualizados`} />
+          <AlertModalSucces value={`The branch office data has been updated.`} />
         ) : (
           dataUpdate?.updateBranchOffice === false &&
           showWarning &&

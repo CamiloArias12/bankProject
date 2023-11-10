@@ -2,12 +2,6 @@
 import { MenuSidebar, SideBarModules } from '@/lib/utils/SidebarOptions'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
-import ParametrizationLogo from '../logo/Parametrization'
-import HomeLogo from '../logo/Home'
-import WalletLogo from '../logo/Wallet'
-import AccountingIcon from '../logo/Accounting'
-import TreasuryIcon from '../logo/Treasury'
 import { useCookies } from 'next-client-cookies'
 import { Role } from '@/lib/utils/user/types'
 import { signOut, useSession } from 'next-auth/react'
@@ -66,7 +60,7 @@ export default function SideBar() {
       </div>
 
       <div className='flex w-full'>
-        <Button radius="none" className='w-full bg-white text-red-500' startContent={<ExitIcon />} onClick={() => signOut()}>Cerrar sesión</Button>
+        <Button radius="none" className='w-full bg-white text-red-500' startContent={<ExitIcon />} onClick={() => signOut()}>Log out</Button>
       </div>
     </div>
   )
