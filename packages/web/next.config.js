@@ -12,15 +12,6 @@ module.exports = {
   env: {
     API_ENDPOINT: process.env.API_ENDPOINT
   },
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/login',
-        permanent: true
-      }
-    ]
-  },
   webpack: (config, { isServer }) => {
     // Add the GraphQL loader rule for both client and server bundles
     config.module.rules.push({

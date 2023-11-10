@@ -9,6 +9,7 @@ import { ClientService } from "./client/client.service";
 import { ClientResolver } from "./client/client.resolver";
 import { EmployeeService } from "./employee/employee.service";
 import { EmployeeResolver } from "./employee/employee.resolver";
+import { UserController } from './user.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User, Employee, Client])],
@@ -21,5 +22,6 @@ import { EmployeeResolver } from "./employee/employee.resolver";
     EmployeeResolver,
   ],
   exports: [ClientService, EmployeeService],
+  controllers: [UserController],
 })
 export class UserModule {}

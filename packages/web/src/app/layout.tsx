@@ -4,24 +4,30 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ClientCookiesProvider } from '@/lib/cookies/CookiesProvider'
 import { cookies } from 'next/headers'
+import AuthProvider from './auth/AuthProvider'
+import { getServerSession } from 'next-auth'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Foncastel',
+  title: 'Bank',
   icons: '/logo.svg'
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: {
   children: React.ReactNode
 }) {
+  const session = await getServerSession();
+
   return (
     <html lang="en">
       <body className={inter.className}>
         <ClientCookiesProvider value={cookies().getAll()}>
-          <ApolloWrapper>{children}</ApolloWrapper>
+          <AuthProvider session={session}>
+            <ApolloWrapper>{children}</ApolloWrapper>
+          </AuthProvider>
         </ClientCookiesProvider>
       </body>
     </html>

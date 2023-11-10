@@ -7,13 +7,6 @@ import {
   OneToOne,
   PrimaryColumn,
 } from "typeorm";
-import {
-  CivilStatus,
-  Gender,
-  HousingType,
-  Studies,
-  TypeIdentification,
-} from "./dto/enum-type";
 import { Client } from "./client/client.entity";
 import { Employee } from "./employee/employee.entity";
 import { BranchOffice } from "src/branch-office/entities/branch-office.entity";

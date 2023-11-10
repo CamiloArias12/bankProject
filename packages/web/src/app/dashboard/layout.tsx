@@ -1,11 +1,20 @@
+import { getServerSession } from 'next-auth'
 import HeaderModule from '../components/header/HeaderModule'
 import SideBar from '../components/sidebar/Sidebar'
+import { redirect } from 'next/navigation'
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children
 }: {
   children: React.ReactNode
 }) {
+
+  const session = await getServerSession();
+
+  if(!session || !session.user){
+    redirect('/api/auth/signin');
+  }
+
   return (
     <div className="flex flex-row h-screen  ">
       <div className="flex ">
