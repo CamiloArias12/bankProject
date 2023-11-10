@@ -2,6 +2,7 @@ import { getServerSession } from 'next-auth'
 import HeaderModule from '../components/header/HeaderModule'
 import SideBar from '../components/sidebar/Sidebar'
 import { redirect } from 'next/navigation'
+import TopBar from '../components/topbar/TopBar'
 
 export default async function DashboardLayout({
   children
@@ -11,7 +12,7 @@ export default async function DashboardLayout({
 
   const session = await getServerSession();
 
-  if(!session || !session.user){
+  if (!session || !session.user) {
     redirect('/api/auth/signin');
   }
 
@@ -20,15 +21,9 @@ export default async function DashboardLayout({
       <div className="flex ">
         <SideBar />
       </div>
-      <div className="flex  flex-col flex-grow mr-4">
-        <div className=" mr-4 flex flex-row h-16 bg-white">
-          <HeaderModule colorBorder="border-[#006AE7] " title="TERCEROS" />
-          <div className=" flex flex-row items-center">
-            <img className="h-8 w-8" src="/account.svg" />
-            <label className="flex-grow text-xs">Juan Arias</label>
-          </div>
-        </div>
-        <section className=" flex flex-grow my-6 mx-4 h-[80%]">
+      <div className='flex flex-col w-full'>
+        <TopBar />
+        <section className="flex flex-grow my-6 mx-4 h-[80%]">
           {children}
         </section>
       </div>

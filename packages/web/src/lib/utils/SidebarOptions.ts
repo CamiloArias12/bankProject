@@ -31,7 +31,7 @@ export const SideBarModules = [
     role: [Role.EMPLOYEE]
   },
   {
-    name: 'Cdt',
+    name: 'CDT',
     href: '/dashboard/cdts',
     menu: MenuSidebar.cdt,
     role: [Role.EMPLOYEE, Role.CLIENT]

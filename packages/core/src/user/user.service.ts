@@ -23,6 +23,8 @@ export class UserService {
       return {
         identification: query.identification,
         role: query.client ? EnumUser.CLIENT : EnumUser.EMPLOYEE,
+        name: query.name,
+        email: query.email,
       };
     }
 

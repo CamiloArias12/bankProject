@@ -2,8 +2,8 @@ import { gql } from '@apollo/client'
 import { getClient } from '@/lib/graphql/apollo-client-server'
 import { Cdt } from '@/lib/utils/cdt/types'
 import Cdts from './Cdts'
-import { getCookies } from 'next-client-cookies/server'
 import { Role } from '@/lib/utils/user/types'
+import { getServerSession } from 'next-auth'
 
 export const revalidate = 0
 
@@ -50,9 +50,9 @@ async function getCdtesClient(identification: number): Promise<Cdt[]> {
 }
 
 async function PageCdt() {
-  const cookies = getCookies()
-  const data = cookies.get('role')
-  const identification = cookies.get('data')
+  const session = await getServerSession();
+  const data = session.user.role;
+  const identification = session.user.identification;
   const cdts: Cdt[] =
     data === Role.EMPLOYEE
       ? await getCdtes()

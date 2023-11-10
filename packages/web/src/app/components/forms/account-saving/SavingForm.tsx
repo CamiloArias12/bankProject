@@ -21,7 +21,6 @@ export function SavingForm({
   handleSavingSelect: any
   clients?: any
 }) {
-  console.log(saving)
   return (
     <>
       <div className="flex flex-col space-y-4 w-full max-w-3xl p-4">

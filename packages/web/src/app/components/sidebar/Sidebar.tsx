@@ -12,8 +12,8 @@ import { useCookies } from 'next-client-cookies'
 import { Role } from '@/lib/utils/user/types'
 import { signOut, useSession } from 'next-auth/react'
 import { Button } from '@nextui-org/react'
+import { Crosshair1Icon, CrumpledPaperIcon, DrawingPinIcon, ExitIcon, HomeIcon, MagicWandIcon, PersonIcon, RocketIcon } from '@radix-ui/react-icons'
 export default function SideBar() {
-  const [toggleBar, setToggleBar] = useState(false)
   useState<boolean>(false)
   const [select, setSelect] = useState(MenuSidebar.main)
 
@@ -25,125 +25,48 @@ export default function SideBar() {
 
   return (
     <div
-      className={`flex flex-col shadow  flex-grow justify-between bg-white  w-[250px]`}
+      className={`flex flex-col shadow flex-grow justify-between`}
     >
-      <Button onClick={() => signOut()}>Sign out</Button>
-      <div className=" flex flex-col h-full ">
-        <div className="relative ">
-          <div
-            className={`absolute h-8 w-8 -right-6 ${!toggleBar ? '-top-20' : '-top-10'
-              }`}
-          >
-            <img
-              src="/logo.svg"
-              onClick={() => {
-                setToggleBar(!toggleBar)
-              }}
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-col rounded-sm py-4 items-center justify-center h-full  w-full my-8">
-          <div className="w-full flex flex-col justify-center items-center">
-            {SideBarModules.map(sidebar => (
-              <>
-                {sidebar.role.includes(dataRole as Role) && (
-                  <div key={sidebar.name} className="w-full   ">
-                    <motion.div
-                      className={`flex flex-col  my-5    mx-3 
-				 `}
-                      whileHover={{ scale: 1.03 }}
-                    >
-                      <div
-                        className={`gene w-full ${toggleBar && ' rounded-sm'}`}
-                        onClick={() => {
-                          setSelect(sidebar.menu)
-                        }}
-                      >
-                        <div className="flex  flex-col w-full">
-                          <div
-                            className={` p-4 hover:border-b-2 hover:border-[#054818]]
-				       ${sidebar.menu === select && ' rounded-sm bg-[#dde0e5] '}
-
-				    `}
-                          >
-                            <div
-                              className={`flex flex-row  w-full h-full 
-				    ${'  justify-center '} 
-				    ${toggleBar ? 'justify-center' : 'justify-between'}
-				    `}
-                              onClick={() => {
-                                route.push(sidebar.href)
-                              }}
-                            >
-                              <div className="flex flex-row">
-                                <div className="h-4 w-4 ">
-                                  {MenuSidebar.main === sidebar.menu &&
-                                    sidebar.menu === select && (
-                                      <HomeLogo color="#054818" />
-                                    )}
-                                  {MenuSidebar.main === sidebar.menu &&
-                                    sidebar.menu !== select && (
-                                      <HomeLogo color="#26384b" />
-                                    )}
-                                  {MenuSidebar.branches === sidebar.menu &&
-                                    sidebar.menu === select && (
-                                      <WalletLogo color="#054818" />
-                                    )}
-                                  {MenuSidebar.branches === sidebar.menu &&
-                                    sidebar.menu !== select && (
-                                      <WalletLogo color="#26384b" />
-                                    )}
-                                  {MenuSidebar.users === sidebar.menu &&
-                                    sidebar.menu === select && (
-                                      <ParametrizationLogo color="#054818" />
-                                    )}
-                                  {MenuSidebar.users === sidebar.menu &&
-                                    sidebar.menu !== select && (
-                                      <ParametrizationLogo color="#26384b" />
-                                    )}
-
-                                  {MenuSidebar.cdt === sidebar.menu &&
-                                    sidebar.menu === select && (
-                                      <AccountingIcon color="#054818" />
-                                    )}
-                                  {MenuSidebar.cdt === sidebar.menu &&
-                                    sidebar.menu !== select && (
-                                      <AccountingIcon color="#26384b" />
-                                    )}
-
-                                  {MenuSidebar.saving === sidebar.menu &&
-                                    sidebar.menu === select && (
-                                      <TreasuryIcon color="#054818" />
-                                    )}
-
-                                  {MenuSidebar.saving === sidebar.menu &&
-                                    sidebar.menu !== select && (
-                                      <TreasuryIcon color="#26384b" />
-                                    )}
-                                </div>
-                                {!toggleBar && (
-                                  <label
-                                    className={`pl-6 text-sm font-sans  ${sidebar.menu == select
-                                      ? 'text-[#054818] font-semibold'
-                                      : 'text-[#26384b]'
-                                      }`}
-                                  >
-                                    {sidebar.name}
-                                  </label>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  </div>
+      <div className='w-full h-16'>
+      </div>
+      <div
+        className='flex flex-col h-full gap-5'
+      >
+        {SideBarModules.map(sidebar => (
+          <>
+            {sidebar.role.includes(dataRole as Role) && (
+              <div key={sidebar.name} className="w-full">
+                {MenuSidebar.main === sidebar.menu && (
+                  <Button radius="none" className="w-full bg-white" onClick={() => route.push(sidebar.href)} startContent={<HomeIcon />}>{sidebar.name}</Button>
                 )}
-              </>
-            ))}
-          </div>
-        </div>
+                {MenuSidebar.branches === sidebar.menu &&
+                  (
+                    <Button radius="none" className="w-full bg-white" onClick={() => route.push(sidebar.href)} startContent={<CrumpledPaperIcon />}>{sidebar.name}</Button>
+                  )}
+                {MenuSidebar.users === sidebar.menu && (
+                  <Button radius="none" className="w-full bg-white" onClick={() => route.push(sidebar.href)} startContent={<Crosshair1Icon />}>{sidebar.name}</Button>
+                )}
+                {MenuSidebar.thirds === sidebar.menu && (
+                  <Button radius="none" className="w-full bg-white" onClick={() => route.push(sidebar.href)} startContent={<PersonIcon />}>{sidebar.name}</Button>
+                )}
+ 
+                {MenuSidebar.cdt === sidebar.menu && (
+                  <Button radius="none" className="w-full bg-white" onClick={() => route.push(sidebar.href)} startContent={<DrawingPinIcon />}>{sidebar.name}</Button>
+                )}
+                {MenuSidebar.saving === sidebar.menu && (
+                  <Button radius="none" className="w-full bg-white" onClick={() => route.push(sidebar.href)} startContent={<RocketIcon />}>{sidebar.name}</Button>
+                )}
+                {MenuSidebar.credits === sidebar.menu && (
+                  <Button radius="none" className="w-full bg-white" onClick={() => route.push(sidebar.href)} startContent={<MagicWandIcon />}>{sidebar.name}</Button>
+                )}
+              </div>
+            )}
+          </>
+        ))}
+      </div>
+
+      <div className='flex w-full'>
+        <Button radius="none" className='w-full bg-white text-red-500' startContent={<ExitIcon />} onClick={() => signOut()}>Cerrar sesión</Button>
       </div>
     </div>
   )

@@ -177,7 +177,6 @@ function TableCredits({ credits }: { credits: Credit[] }) {
         route.refresh()
       }
 
-      console.log('delete')
       const timeout = setTimeout(() => {
         setShowWarningDelete(false)
       }, 3000) // 3 seconds in milliseconds

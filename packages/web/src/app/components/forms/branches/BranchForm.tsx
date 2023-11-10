@@ -1,6 +1,5 @@
 'use client'
-import InputField from '@/app/components/input/InputField'
-import Button from '../../input/Button'
+import { Button, Input } from '@nextui-org/react'
 
 export function BranchForm({
   onClickAccept,
@@ -15,41 +14,33 @@ export function BranchForm({
 }) {
   return (
     <>
-      <div className="flex flex-col space-y-4 w-full max-w-3xl p-4">
-        <InputField
+      <div className="flex flex-col space-y-4 w-full">
+        <Input
           name="name"
           label="Nombre"
           value={branch.name}
           onChange={handleBranch}
         />
-        <InputField
+        <Input
           name="address"
           label="Direccion"
           value={branch.address}
           onChange={handleBranch}
         />
-        <InputField
+        <Input
           name="phoneNumber"
           label="Telefono"
           value={branch.phoneNumber}
           onChange={handleBranch}
         />
 
-        <div className="pt-10 flex justify-end">
-          <div className="pr-4">
-            <Button
-              name="Cancelar"
-              background="border border-[#054818] text-[#054818]"
-              onClick={onClickCancel}
-            />
-          </div>
-          <div className="pr-4">
-            <Button
-              name="Aceptar"
-              background="bg-[#054818] text-white"
-              onClick={onClickAccept}
-            />
-          </div>
+        <div className="flex justify-end gap-2">
+          <Button
+            onClick={onClickCancel}
+          >Cancelar</Button>
+          <Button
+            onClick={onClickAccept}
+          >Aceptar</Button>
         </div>
       </div>
     </>

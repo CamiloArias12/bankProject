@@ -38,7 +38,6 @@ function InputField({
         onChange={onChange}
         onBlur={() => {
           if (onBlur !== undefined) {
-            console.log('asfsadjkf')
             if (!onBlur(name, value)) {
               setColor(true)
             } else {

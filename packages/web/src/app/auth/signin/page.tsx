@@ -49,14 +49,16 @@ export default function Login() {
               </button>
             }
           />
-          <Button onClick={() => {
+          <Button 
+            className="w-full bg-sky-300 text-sky-900 font-bold"
+            onClick={() => {
             signIn('credentials', {
               email: email,
               password: password,
               redirect: true,
               callbackUrl: '/dashboard'
             })
-          }}>Sign in</Button>
+          }}>Iniciar sesión</Button>
         </div>
       </div>
     </div>

@@ -43,10 +43,11 @@ export const authOptions: NextAuthOptions = {
     },
 
     async session({ token, session,user }) {
-      console.log(token);
       session.user = {
         identification: token.identification,
-        role: token.role
+        role: token.role,
+        name: token.name,
+        email: token.email
       };
       return session;
     }
@@ -54,7 +55,7 @@ export const authOptions: NextAuthOptions = {
 
 };
 
-const handler = NextAuth(authOptions);
+export const handler = NextAuth(authOptions);
 
 export { handler as nextAuthConfig };
 export { handler as GET, handler as POST }

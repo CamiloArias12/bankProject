@@ -25,11 +25,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ClientCookiesProvider value={cookies().getAll()}>
-          <AuthProvider session={session}>
+        <AuthProvider session={session}>
+          <ClientCookiesProvider value={cookies().getAll()}>
             <ApolloWrapper>{children}</ApolloWrapper>
-          </AuthProvider>
-        </ClientCookiesProvider>
+          </ClientCookiesProvider>
+        </AuthProvider>
       </body>
     </html>
   )

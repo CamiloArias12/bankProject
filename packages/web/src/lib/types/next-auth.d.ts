@@ -5,6 +5,8 @@ declare module "next-auth" {
     user: {
       identification: number;
       role: string;
+      name: string;
+      email: string;
     };
   }
 }
@@ -16,6 +18,8 @@ declare module "next-auth/jwt" {
     user: {
       identification: number;
       role: string;
+      name: string;
+      email: string;
     };
 
   }

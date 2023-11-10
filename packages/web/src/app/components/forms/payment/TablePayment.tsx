@@ -117,7 +117,6 @@ function TablePayment({
         route.refresh()
       }
 
-      console.log('delete')
       const timeout = setTimeout(() => {
         setShowWarning(false)
       }, 5000) // 3 seconds in milliseconds
